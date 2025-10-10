@@ -1,0 +1,106 @@
+{
+  "system_info": {
+    "name": "期货Trading Agents系统",
+    "version": "1.0.0",
+    "description": "基于Trading Agents架构的期货多Agent协作分析系统",
+    "created_date": "2025-01-19"
+  },
+  
+  "paths": {
+    "data_root_dir": "./qihuo/database",
+    "results_dir": "./qihuo/trading_agents_results",
+    "logs_dir": "./qihuo/logs",
+    "cache_dir": "./qihuo/cache",
+    "config_dir": "./qihuo/config"
+  },
+  
+  "api_settings": {
+    "deepseek": {
+      "api_key": "YOUR_DEEPSEEK_API_KEY_HERE",
+      "base_url": "https://api.deepseek.com/v1",
+      "model": "deepseek-chat",
+      "reasoning_model": "deepseek-reasoner",
+      "max_tokens": 4000,
+      "temperature": 0.1
+    },
+    "serper": {
+      "api_key": "YOUR_SERPER_API_KEY_HERE",
+      "base_url": "https://google.serper.dev/search"
+    }
+  },
+  
+  "system_settings": {
+    "max_concurrent_processes": 4,
+    "default_timeout": 300,
+    "retry_attempts": 3,
+    "enable_progress_tracking": true,
+    "auto_save_results": true
+  },
+  
+  "analysis_settings": {
+    "default_analysis_depth": "standard",
+    "enable_cross_validation": true,
+    "minimum_data_quality": 0.7,
+    "confidence_threshold": 0.6,
+    "enable_real_time_data": true
+  },
+  
+  "analysis_modules": {
+    "inventory": {
+      "enabled": true,
+      "confidence_weight": 1.0,
+      "timeout_seconds": 120
+    },
+    "positioning": {
+      "enabled": true,
+      "confidence_weight": 1.0,
+      "timeout_seconds": 120
+    },
+    "term_structure": {
+      "enabled": true,
+      "confidence_weight": 1.0,
+      "timeout_seconds": 120
+    },
+    "technical": {
+      "enabled": true,
+      "confidence_weight": 1.0,
+      "timeout_seconds": 120
+    },
+    "basis": {
+      "enabled": true,
+      "confidence_weight": 1.0,
+      "timeout_seconds": 120
+    },
+    "news": {
+      "enabled": true,
+      "confidence_weight": 0.8,
+      "timeout_seconds": 180
+    }
+  },
+  
+  "debate_settings": {
+    "max_debate_rounds": 2,
+    "max_risk_discuss_rounds": 2,
+    "debate_timeout_seconds": 300,
+    "minimum_confidence_threshold": 0.6,
+    "enable_reasoning_mode": true
+  },
+  
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file_logging": true,
+    "console_logging": true,
+    "max_log_file_size_mb": 100,
+    "backup_count": 5
+  },
+  
+  "supported_commodities": [
+    "RB", "HC", "I", "J", "JM", "SS",
+    "CU", "AL", "ZN", "NI", "SN", "PB", "AU", "AG",
+    "RU", "NR", "BU", "FU", "LU", "EB", "EG", "MA", "TA", "PX",
+    "SR", "CF", "AP", "CJ", "SP", "P", "Y", "M", "RM", "OI",
+    "FG", "SA", "L", "PP", "V", "UR", "SF", "SM", "LC", "SI", "PS"
+  ]
+}
+

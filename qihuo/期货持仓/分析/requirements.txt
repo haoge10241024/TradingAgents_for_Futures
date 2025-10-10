@@ -1,0 +1,11 @@
+streamlit
+pandas
+numpy
+plotly
+akshare
+openpyxl
+xlsxwriter
+requests
+python-dateutil
+pytz
+urllib3 

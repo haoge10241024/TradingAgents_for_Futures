@@ -1,0 +1,24 @@
+{
+  "symbol": "LC",
+  "record_count": 50,
+  "date_range": {
+    "start": "2025-06-16T00:00:00",
+    "end": "2025-08-22T00:00:00"
+  },
+  "last_updated": "2025-08-23T09:00:46.521297",
+  "columns": [
+    "date",
+    "symbol",
+    "spot_price",
+    "near_contract",
+    "near_contract_price",
+    "dominant_contract",
+    "dominant_contract_price",
+    "near_month",
+    "dominant_month",
+    "near_basis",
+    "dom_basis",
+    "near_basis_rate",
+    "dom_basis_rate"
+  ]
+}

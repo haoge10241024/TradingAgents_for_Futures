@@ -1,0 +1,29 @@
+{
+  "backup_time": "2025-09-20T23:34:11.303027",
+  "backup_location": "D:\\Cursor\\cursor项目\\TradingAgent\\Trading Agents for Futures",
+  "files_copied": 15,
+  "directories_copied": 3,
+  "core_files": [
+    "期货TradingAgents系统_专业完整版界面.py",
+    "优化版辩论风控决策系统.py",
+    "期货TradingAgents系统_基础架构.py",
+    "期货TradingAgents系统_工具模块.py",
+    "期货TradingAgents系统_配置文件.json",
+    "图表下载功能增强器.py",
+    "价格数据获取器.py",
+    "unified_futures_data_updater.py",
+    "改进版持仓席位分析适配器.py",
+    "持仓席位分析_真实数据适配器.py",
+    "持仓席位分析_真实数据完整版.py",
+    "持仓席位真实AI分析增强器.py",
+    "requirements.txt",
+    "图表下载功能使用说明.md",
+    "README.md"
+  ],
+  "core_directories": [
+    "qihuo",
+    "modules",
+    "logs"
+  ],
+  "status": "completed"
+}

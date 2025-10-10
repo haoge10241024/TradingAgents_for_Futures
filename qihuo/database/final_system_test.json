@@ -1,0 +1,35 @@
+{
+  "start_time": "2025-08-25T15:45:46.114766",
+  "end_time": "2025-08-25T15:48:02.591616",
+  "target_date": "2025-08-25T15:45:46.114759",
+  "update_mode": "specific_modules",
+  "selected_modules": [
+    "technical_analysis"
+  ],
+  "selected_varieties": [
+    "OI",
+    "FU",
+    "L",
+    "PG",
+    "SI"
+  ],
+  "modules": {
+    "technical_analysis": {
+      "status": "failed",
+      "updated_varieties": [],
+      "failed_varieties": [
+        "SI"
+      ],
+      "processing_time": 0,
+      "error_message": null
+    }
+  },
+  "summary": {
+    "total_updated_varieties": [],
+    "total_failed_varieties": [
+      "SI"
+    ],
+    "total_processing_time": 136.47682929039001,
+    "success_rate": 0.0
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "start_time": "2025-08-24T10:13:48.455946",
+  "target_date": "2025-08-22",
+  "modules": {
+    "basis": {
+      "module": "basis",
+      "status": "error",
+      "error": "'BasisDataUpdater' object has no attribute 'update_data'",
+      "elapsed_time": 1.8358230590820312e-05,
+      "updated_varieties": [],
+      "failed_varieties": []
+    },
+    "inventory": {
+      "module": "inventory",
+      "status": "error",
+      "error": "'InventoryDataUpdater' object has no attribute 'update_data'",
+      "elapsed_time": 5.3882598876953125e-05,
+      "updated_varieties": [],
+      "failed_varieties": []
+    },
+    "positioning": {
+      "module": "positioning",
+      "status": "error",
+      "error": "'PositioningDataUpdater' object has no attribute 'update_data'",
+      "elapsed_time": 5.745887756347656e-05,
+      "updated_varieties": [],
+      "failed_varieties": []
+    },
+    "term_structure": {
+      "module": "term_structure",
+      "status": "error",
+      "error": "'TermStructureUpdater' object has no attribute 'update_data'",
+      "elapsed_time": 5.53131103515625e-05,
+      "updated_varieties": [],
+      "failed_varieties": []
+    },
+    "technical_analysis": {
+      "module": "technical_analysis",
+      "status": "error",
+      "error": "'TechnicalDataUpdater' object has no attribute 'update_data'",
+      "elapsed_time": 6.079673767089844e-05,
+      "updated_varieties": [],
+      "failed_varieties": []
+    }
+  },
+  "summary": {
+    "total_modules": 5,
+    "successful_modules": 0,
+    "failed_modules": 5,
+    "total_updated_varieties": [],
+    "total_failed_varieties": [],
+    "total_elapsed_time": 0.00024580955505371094
+  },
+  "end_time": "2025-08-24T10:18:49.677839"
+}

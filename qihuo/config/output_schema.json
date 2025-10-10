@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Futures Analysis Report",
+  "type": "object",
+  "required": ["symbol", "as_of", "signals", "entry_plan", "risk", "audit"],
+  "properties": {
+    "symbol": {"type": "string"},
+    "as_of": {"type": "string", "description": "YYYY-MM-DD"},
+    "signals": {
+      "type": "object",
+      "required": ["direction", "conviction", "timeframe"],
+      "properties": {
+        "direction": {"type": "string", "enum": ["long", "short", "neutral"]},
+        "conviction": {"type": "number", "minimum": 0, "maximum": 1},
+        "timeframe": {"type": "string"},
+        "rationale_bullets": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "entry_plan": {
+      "type": "object",
+      "properties": {
+        "triggers": {"type": "array", "items": {"type": "string"}},
+        "position_sizing": {
+          "type": "object",
+          "properties": {
+            "method": {"type": "string"},
+            "target_vol": {"type": "number"},
+            "max_margin_ratio": {"type": "number"}
+          }
+        },
+        "execution": {
+          "type": "object",
+          "properties": {
+            "participation_rate": {"type": "number"},
+            "algo": {"type": "string"}
+          }
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "properties": {
+        "stop_loss": {"type": "object"},
+        "take_profit": {"type": "object"},
+        "overnight_limits": {"type": "object"},
+        "stress_flags": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "roll_strategy": {"type": "object"},
+    "audit": {
+      "type": "object",
+      "required": ["generated_at", "project", "confidence"],
+      "properties": {
+        "generated_at": {"type": "string"},
+        "project": {"type": "string"},
+        "tools_called": {"type": "array", "items": {"type": "string"}},
+        "llm_models": {"type": "array", "items": {"type": "string"}},
+        "confidence": {"type": "number"}
+      }
+    }
+  }
+}
+
+

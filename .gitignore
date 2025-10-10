@@ -1,0 +1,130 @@
+# ============================================================================
+# 商品期货AI分析系统 - Git忽略文件
+# ============================================================================
+
+# Python编译文件
+*.py[cod]
+*$py.class
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# 虚拟环境
+venv/
+env/
+ENV/
+.venv
+
+# IDE和编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 配置文件（包含敏感信息）
+config.py                                      # 包含API密钥，不上传
+qihuo/config/core.yaml                        # 个人配置不上传
+!qihuo/config/core.example.yaml               # 模板可以上传
+期货TradingAgents系统_配置文件.json              # 包含API密钥，不上传
+!期货TradingAgents系统_配置文件.example.json     # 模板可以上传
+
+# 日志文件
+*.log
+logs/
+*.log.*
+
+# 数据库文件
+qihuo/database/backups/         # 备份文件不上传
+qihuo/database/cache/           # 缓存不上传
+qihuo/database/logs/            # 日志不上传
+qihuo/database/*.json           # 临时JSON不上传
+qihuo/database/*.backup         # 备份不上传
+qihuo/database/update_report_*.json  # 更新报告不上传
+
+# 保留数据目录结构
+!qihuo/database/.gitkeep
+!qihuo/database/*/.gitkeep
+
+# CSV数据文件可以上传（示例数据）
+# 如果数据文件过大，可以取消下面的注释来排除它们
+# qihuo/database/**/*.csv
+
+# 输出和结果文件
+qihuo/output/
+qihuo/cache/
+qihuo/analysis_results/
+qihuo/debate_results/
+qihuo/final_decisions/
+qihuo/trading_agents_results/
+*.csv
+*.xlsx
+*.xls
+!qihuo/config/*.csv
+!qihuo/config/*.xlsx
+
+# 临时文件
+temp/
+tmp/
+*.tmp
+*.temp
+temp_*.py
+
+# Word和PDF文档（生成的报告）
+*.docx
+*.doc
+*.pdf
+!*template*.docx
+!*模板*.docx
+
+# 图表和图片（生成的）
+*.png
+*.jpg
+*.jpeg
+*.gif
+!docs/*.png
+!docs/*.jpg
+
+# 测试和调试
+test_*.py
+debug_*.py
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 系统文件
+Thumbs.db
+Desktop.ini
+.Spotlight-V100
+.Trashes
+
+# 备份文件
+*.bak
+*.backup
+*_backup.*
+backup_*/
+
+# 大型数据文件
+*.h5
+*.hdf5
+*.parquet
+
+# 缓存
+.cache/
+*.cache
+

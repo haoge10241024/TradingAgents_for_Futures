@@ -1,0 +1,28 @@
+{
+  "start_time": "2025-08-24T21:45:35.949742",
+  "end_time": "2025-08-24T21:45:36.102250",
+  "target_date": "2025-08-24T21:45:35.949737",
+  "update_mode": "specific_varieties",
+  "selected_modules": [
+    "technical_analysis"
+  ],
+  "selected_varieties": [
+    "A",
+    "RB"
+  ],
+  "modules": {
+    "technical_analysis": {
+      "status": "success",
+      "updated_varieties": [],
+      "failed_varieties": [],
+      "processing_time": 0,
+      "error_message": null
+    }
+  },
+  "summary": {
+    "total_updated_varieties": [],
+    "total_failed_varieties": [],
+    "total_processing_time": 0.15250706672668457,
+    "success_rate": 0
+  }
+}

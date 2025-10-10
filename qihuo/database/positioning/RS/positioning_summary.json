@@ -1,0 +1,28 @@
+{
+  "symbol": "RS",
+  "symbol_name": "菜籽",
+  "total_records": 1495,
+  "date_range": "20250825 ~ 20250919",
+  "position_types": [
+    "成交量",
+    "多单持仓",
+    "空单持仓"
+  ],
+  "update_time": "2025-09-19 21:48:18",
+  "update_mode": "incremental",
+  "new_records_this_update": 51,
+  "files_info": {
+    "volume_ranking.csv": {
+      "records": 498,
+      "new_this_update": 17
+    },
+    "long_position_ranking.csv": {
+      "records": 499,
+      "new_this_update": 17
+    },
+    "short_position_ranking.csv": {
+      "records": 498,
+      "new_this_update": 17
+    }
+  }
+}

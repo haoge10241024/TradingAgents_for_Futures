@@ -1,0 +1,11 @@
+akshare>=1.10.0
+pandas>=1.5.0
+numpy==1.26.4
+openpyxl==3.1.2
+flask==3.0.2
+flask-cors==4.0.0
+python-dotenv==1.0.1
+pyngrok==7.1.5
+streamlit>=1.22.0
+plotly>=5.13.0
+xlsxwriter>=3.1.0 

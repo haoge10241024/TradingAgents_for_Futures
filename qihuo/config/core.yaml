@@ -1,0 +1,49 @@
+# 基础配置模板（复制为 core.yaml 生效）
+
+project:
+  name: qihuo-ai-trader
+  timezone: Asia/Shanghai
+  output_dir: qihuo/output
+  cache_dir: qihuo/.data/cache
+
+data:
+  default_lookback_days: 365
+  rate_limit_per_sec: 4
+  retries: 3
+  timeout_sec: 30
+  use_cache: true
+
+symbols:
+  default: ["RB", "CU", "LH"]
+
+risk:
+  max_margin_ratio: 0.30
+  max_position_per_symbol: 0.20
+  allow_overnight: true
+  atr_stop_multiplier: 2.5
+
+llm:
+  provider: deepseek
+  model: deepseek-chat
+  api_key_env: DEEPSEEK_API_KEY
+  analysis_mode: llm  # 可选: rule | llm
+  # 仅新闻/宏观节点允许联网
+  web_search:
+    enabled: true
+    whitelist_domains:
+      - www.shfe.com.cn
+      - www.czce.com.cn
+      - www.dce.com.cn
+      - www.cffex.com.cn
+      - www.gfex.com.cn
+      - www.stats.gov.cn
+      - www.pbc.gov.cn
+      - www.imf.org
+      - www.oecd.org
+    timeout_sec: 10
+    retries: 1
+
+logging:
+  level: INFO
+  file: qihuo/output/run.log
+

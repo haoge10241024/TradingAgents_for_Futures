@@ -1,0 +1,2732 @@
+{
+  "scan_time": "2025-08-22T16:17:46.667649",
+  "modules": {
+    "basis": {
+      "name": "基差数据",
+      "varieties": {
+        "A": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AG": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AL": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AU": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BR": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BU": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BZ": {
+          "records": 33,
+          "start_date": "2025-07-08T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "C": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CF": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CU": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CY": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EB": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EG": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FG": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FU": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "HC": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "I": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JD": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JM": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "L": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LC": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LH": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "M": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "MA": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "NI": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "OI": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "P": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PB": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PF": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PG": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PP": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PR": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PS": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PX": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RB": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RM": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RU": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SA": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SF": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SH": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SI": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SM": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SN": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SP": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SR": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SS": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "TA": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "UR": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "V": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "WR": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "Y": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "ZN": {
+          "records": 49,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        }
+      },
+      "variety_count": 52,
+      "total_records": 2532,
+      "date_range": {
+        "start": "2025-06-16T00:00:00",
+        "end": "2025-08-21T00:00:00"
+      },
+      "status": "success"
+    },
+    "inventory": {
+      "name": "库存数据",
+      "varieties": {
+        "A": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AG": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AL": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AO": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AP": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AU": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "B": {
+          "records": 54,
+          "start_date": "2025-05-19T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BR": {
+          "records": 72,
+          "start_date": "2025-05-13T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BU": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "C": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CF": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CJ": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CS": {
+          "records": 75,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CU": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CY": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EB": {
+          "records": 47,
+          "start_date": "2025-05-12T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EG": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FG": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FU": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "HC": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "I": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "J": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JD": {
+          "records": 31,
+          "start_date": "2025-05-23T00:00:00",
+          "end_date": "2025-08-18T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JM": {
+          "records": 39,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "L": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LC": {
+          "records": 72,
+          "start_date": "2025-05-13T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LG": {
+          "records": 63,
+          "start_date": "2025-05-13T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LH": {
+          "records": 73,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LU": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "M": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "MA": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "NI": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "NR": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "OI": {
+          "records": 76,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "P": {
+          "records": 64,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PB": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PF": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PG": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PK": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PP": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PR": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PS": {
+          "records": 72,
+          "start_date": "2025-05-13T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PTA": {
+          "records": 70,
+          "start_date": "2025-05-13T00:00:00",
+          "end_date": "2025-08-19T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PX": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RB": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RM": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RS": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RU": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SA": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SF": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SH": {
+          "records": 72,
+          "start_date": "2025-05-13T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SI": {
+          "records": 72,
+          "start_date": "2025-05-13T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SM": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SN": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SP": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SR": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SS": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "TA": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "UR": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "V": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "Y": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "ZN": {
+          "records": 77,
+          "start_date": "2025-05-06T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        }
+      },
+      "variety_count": 62,
+      "total_records": 4571,
+      "date_range": {
+        "start": "2025-05-06T00:00:00",
+        "end": "2025-08-21T00:00:00"
+      },
+      "status": "success"
+    },
+    "positioning": {
+      "name": "持仓数据",
+      "varieties": {
+        "A": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AG": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AL": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AO": {
+          "records": 980,
+          "start_date": "1970-01-01T00:00:00.020250616",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AP": {
+          "records": 900,
+          "start_date": "1970-01-01T00:00:00.020250616",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AU": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "B": {
+          "records": 1040,
+          "start_date": "1970-01-01T00:00:00.020250616",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BU": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "C": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CF": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CJ": {
+          "records": 900,
+          "start_date": "1970-01-01T00:00:00.020250616",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CS": {
+          "records": 1040,
+          "start_date": "1970-01-01T00:00:00.020250616",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CU": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CY": {
+          "records": 840,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EB": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EG": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FG": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FU": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "HC": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "I": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "J": {
+          "records": 140,
+          "start_date": "1970-01-01T00:00:00.020250818",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JD": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JM": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "L": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LC": {
+          "records": 140,
+          "start_date": "1970-01-01T00:00:00.020250818",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LH": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LU": {
+          "records": 980,
+          "start_date": "1970-01-01T00:00:00.020250616",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "M": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "MA": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "NI": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "NR": {
+          "records": 980,
+          "start_date": "1970-01-01T00:00:00.020250616",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "OI": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "P": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PB": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PF": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PG": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PK": {
+          "records": 900,
+          "start_date": "1970-01-01T00:00:00.020250616",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PP": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PR": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PS": {
+          "records": 140,
+          "start_date": "1970-01-01T00:00:00.020250818",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PX": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RB": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RM": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RS": {
+          "records": 238,
+          "start_date": "1970-01-01T00:00:00.020250616",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RU": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SA": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SF": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SI": {
+          "records": 140,
+          "start_date": "1970-01-01T00:00:00.020250818",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SM": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SN": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SP": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SR": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SS": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "TA": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "UR": {
+          "records": 900,
+          "start_date": "2025-06-16T00:00:00",
+          "end_date": "2025-08-15T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "V": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "Y": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "ZN": {
+          "records": 80,
+          "start_date": "2025-08-18T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        }
+      },
+      "variety_count": 58,
+      "total_records": 24358,
+      "date_range": {
+        "start": "1970-01-01T00:00:00.020250616",
+        "end": "2025-08-21T00:00:00"
+      },
+      "status": "success"
+    },
+    "term_structure": {
+      "name": "期限结构数据",
+      "varieties": {
+        "A": {
+          "records": 321,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AD": {
+          "records": 460,
+          "start_date": "1970-01-01T00:00:00.020250610",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AG": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AL": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AO": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AP": {
+          "records": 410,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AU": {
+          "records": 512,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "B": {
+          "records": 348,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BB": {
+          "records": 165,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BC": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BR": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BU": {
+          "records": 1024,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "C": {
+          "records": 321,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CF": {
+          "records": 354,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CJ": {
+          "records": 350,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CS": {
+          "records": 320,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CU": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CY": {
+          "records": 201,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EB": {
+          "records": 340,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EC": {
+          "records": 384,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EG": {
+          "records": 330,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FB": {
+          "records": 291,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FG": {
+          "records": 702,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FU": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "HC": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "I": {
+          "records": 348,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "J": {
+          "records": 312,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JD": {
+          "records": 340,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JM": {
+          "records": 348,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "L": {
+          "records": 345,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LC": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LH": {
+          "records": 293,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LU": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "M": {
+          "records": 314,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "MA": {
+          "records": 691,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "NI": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "NR": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "OI": {
+          "records": 345,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "P": {
+          "records": 306,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PB": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PF": {
+          "records": 629,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PG": {
+          "records": 301,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PK": {
+          "records": 411,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PL": {
+          "records": 108,
+          "start_date": "1970-01-01T00:00:00.020250722",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PP": {
+          "records": 304,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PR": {
+          "records": 553,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PS": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PX": {
+          "records": 587,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RB": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RM": {
+          "records": 407,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RR": {
+          "records": 291,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RS": {
+          "records": 147,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RU": {
+          "records": 640,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SA": {
+          "records": 707,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SC": {
+          "records": 1280,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SF": {
+          "records": 685,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SH": {
+          "records": 693,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SI": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SM": {
+          "records": 689,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SN": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SP": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SR": {
+          "records": 354,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SS": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "TA": {
+          "records": 695,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "UR": {
+          "records": 702,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "V": {
+          "records": 306,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "WH": {
+          "records": 1,
+          "start_date": "1970-01-01T00:00:00.020250815",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "WR": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "Y": {
+          "records": 306,
+          "start_date": "1970-01-01T00:00:00.020250606",
+          "end_date": "1970-01-01T00:00:00.020250815",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "ZN": {
+          "records": 768,
+          "start_date": "1970-01-01T00:00:00.020250526",
+          "end_date": "1970-01-01T00:00:00.020250821",
+          "file_exists": true,
+          "status": "has_data"
+        }
+      },
+      "variety_count": 70,
+      "total_records": 37399,
+      "date_range": {
+        "start": "1970-01-01T00:00:00.020250526",
+        "end": "1970-01-01T00:00:00.020250821"
+      },
+      "status": "success"
+    },
+    "technical_analysis": {
+      "name": "技术分析数据",
+      "varieties": {
+        "A": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AG": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AL": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AO": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AP": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "AU": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "B": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "BU": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "C": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CF": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CJ": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CS": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CU": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "CY": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EB": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "EG": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FG": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "FU": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "HC": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "I": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "J": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JD": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "JM": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "L": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LC": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LG": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LH": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "LU": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "M": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "MA": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "NI": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "NR": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "OI": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "P": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PB": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PF": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PG": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PK": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PP": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PR": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PS": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "PX": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RB": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RM": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RS": {
+          "records": 123,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "RU": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SA": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SC": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SF": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SH": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SI": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SM": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SN": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SP": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SR": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "SS": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "TA": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "UR": {
+          "records": 125,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-22T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "V": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "Y": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        },
+        "ZN": {
+          "records": 124,
+          "start_date": "2025-02-24T00:00:00",
+          "end_date": "2025-08-21T00:00:00",
+          "file_exists": true,
+          "status": "has_data"
+        }
+      },
+      "variety_count": 61,
+      "total_records": 7575,
+      "date_range": {
+        "start": "2025-02-24T00:00:00",
+        "end": "2025-08-22T00:00:00"
+      },
+      "status": "success"
+    }
+  },
+  "analysis": {
+    "all_varieties": [
+      "A",
+      "AD",
+      "AG",
+      "AL",
+      "AO",
+      "AP",
+      "AU",
+      "B",
+      "BB",
+      "BC",
+      "BR",
+      "BU",
+      "BZ",
+      "C",
+      "CF",
+      "CJ",
+      "CS",
+      "CU",
+      "CY",
+      "EB",
+      "EC",
+      "EG",
+      "FB",
+      "FG",
+      "FU",
+      "HC",
+      "I",
+      "J",
+      "JD",
+      "JM",
+      "L",
+      "LC",
+      "LG",
+      "LH",
+      "LU",
+      "M",
+      "MA",
+      "NI",
+      "NR",
+      "OI",
+      "P",
+      "PB",
+      "PF",
+      "PG",
+      "PK",
+      "PL",
+      "PP",
+      "PR",
+      "PS",
+      "PTA",
+      "PX",
+      "RB",
+      "RM",
+      "RR",
+      "RS",
+      "RU",
+      "SA",
+      "SC",
+      "SF",
+      "SH",
+      "SI",
+      "SM",
+      "SN",
+      "SP",
+      "SR",
+      "SS",
+      "TA",
+      "UR",
+      "V",
+      "WH",
+      "WR",
+      "Y",
+      "ZN"
+    ],
+    "all_varieties_count": 73,
+    "common_varieties": [
+      "A",
+      "AG",
+      "AL",
+      "AU",
+      "BU",
+      "C",
+      "CF",
+      "CU",
+      "CY",
+      "EB",
+      "EG",
+      "FG",
+      "FU",
+      "HC",
+      "I",
+      "JD",
+      "JM",
+      "L",
+      "LC",
+      "LH",
+      "M",
+      "MA",
+      "NI",
+      "OI",
+      "P",
+      "PB",
+      "PF",
+      "PG",
+      "PP",
+      "PR",
+      "PS",
+      "PX",
+      "RB",
+      "RM",
+      "RU",
+      "SA",
+      "SF",
+      "SI",
+      "SM",
+      "SN",
+      "SP",
+      "SR",
+      "SS",
+      "TA",
+      "UR",
+      "V",
+      "Y",
+      "ZN"
+    ],
+    "common_varieties_count": 48,
+    "module_varieties": {
+      "basis": [
+        "A",
+        "AG",
+        "AL",
+        "AU",
+        "BR",
+        "BU",
+        "BZ",
+        "C",
+        "CF",
+        "CU",
+        "CY",
+        "EB",
+        "EG",
+        "FG",
+        "FU",
+        "HC",
+        "I",
+        "JD",
+        "JM",
+        "L",
+        "LC",
+        "LH",
+        "M",
+        "MA",
+        "NI",
+        "OI",
+        "P",
+        "PB",
+        "PF",
+        "PG",
+        "PP",
+        "PR",
+        "PS",
+        "PX",
+        "RB",
+        "RM",
+        "RU",
+        "SA",
+        "SF",
+        "SH",
+        "SI",
+        "SM",
+        "SN",
+        "SP",
+        "SR",
+        "SS",
+        "TA",
+        "UR",
+        "V",
+        "WR",
+        "Y",
+        "ZN"
+      ],
+      "inventory": [
+        "A",
+        "AG",
+        "AL",
+        "AO",
+        "AP",
+        "AU",
+        "B",
+        "BR",
+        "BU",
+        "C",
+        "CF",
+        "CJ",
+        "CS",
+        "CU",
+        "CY",
+        "EB",
+        "EG",
+        "FG",
+        "FU",
+        "HC",
+        "I",
+        "J",
+        "JD",
+        "JM",
+        "L",
+        "LC",
+        "LG",
+        "LH",
+        "LU",
+        "M",
+        "MA",
+        "NI",
+        "NR",
+        "OI",
+        "P",
+        "PB",
+        "PF",
+        "PG",
+        "PK",
+        "PP",
+        "PR",
+        "PS",
+        "PTA",
+        "PX",
+        "RB",
+        "RM",
+        "RS",
+        "RU",
+        "SA",
+        "SF",
+        "SH",
+        "SI",
+        "SM",
+        "SN",
+        "SP",
+        "SR",
+        "SS",
+        "TA",
+        "UR",
+        "V",
+        "Y",
+        "ZN"
+      ],
+      "positioning": [
+        "A",
+        "AG",
+        "AL",
+        "AO",
+        "AP",
+        "AU",
+        "B",
+        "BU",
+        "C",
+        "CF",
+        "CJ",
+        "CS",
+        "CU",
+        "CY",
+        "EB",
+        "EG",
+        "FG",
+        "FU",
+        "HC",
+        "I",
+        "J",
+        "JD",
+        "JM",
+        "L",
+        "LC",
+        "LH",
+        "LU",
+        "M",
+        "MA",
+        "NI",
+        "NR",
+        "OI",
+        "P",
+        "PB",
+        "PF",
+        "PG",
+        "PK",
+        "PP",
+        "PR",
+        "PS",
+        "PX",
+        "RB",
+        "RM",
+        "RS",
+        "RU",
+        "SA",
+        "SF",
+        "SI",
+        "SM",
+        "SN",
+        "SP",
+        "SR",
+        "SS",
+        "TA",
+        "UR",
+        "V",
+        "Y",
+        "ZN"
+      ],
+      "term_structure": [
+        "A",
+        "AD",
+        "AG",
+        "AL",
+        "AO",
+        "AP",
+        "AU",
+        "B",
+        "BB",
+        "BC",
+        "BR",
+        "BU",
+        "C",
+        "CF",
+        "CJ",
+        "CS",
+        "CU",
+        "CY",
+        "EB",
+        "EC",
+        "EG",
+        "FB",
+        "FG",
+        "FU",
+        "HC",
+        "I",
+        "J",
+        "JD",
+        "JM",
+        "L",
+        "LC",
+        "LH",
+        "LU",
+        "M",
+        "MA",
+        "NI",
+        "NR",
+        "OI",
+        "P",
+        "PB",
+        "PF",
+        "PG",
+        "PK",
+        "PL",
+        "PP",
+        "PR",
+        "PS",
+        "PX",
+        "RB",
+        "RM",
+        "RR",
+        "RS",
+        "RU",
+        "SA",
+        "SC",
+        "SF",
+        "SH",
+        "SI",
+        "SM",
+        "SN",
+        "SP",
+        "SR",
+        "SS",
+        "TA",
+        "UR",
+        "V",
+        "WH",
+        "WR",
+        "Y",
+        "ZN"
+      ],
+      "technical_analysis": [
+        "A",
+        "AG",
+        "AL",
+        "AO",
+        "AP",
+        "AU",
+        "B",
+        "BU",
+        "C",
+        "CF",
+        "CJ",
+        "CS",
+        "CU",
+        "CY",
+        "EB",
+        "EG",
+        "FG",
+        "FU",
+        "HC",
+        "I",
+        "J",
+        "JD",
+        "JM",
+        "L",
+        "LC",
+        "LG",
+        "LH",
+        "LU",
+        "M",
+        "MA",
+        "NI",
+        "NR",
+        "OI",
+        "P",
+        "PB",
+        "PF",
+        "PG",
+        "PK",
+        "PP",
+        "PR",
+        "PS",
+        "PX",
+        "RB",
+        "RM",
+        "RS",
+        "RU",
+        "SA",
+        "SC",
+        "SF",
+        "SH",
+        "SI",
+        "SM",
+        "SN",
+        "SP",
+        "SR",
+        "SS",
+        "TA",
+        "UR",
+        "V",
+        "Y",
+        "ZN"
+      ]
+    },
+    "module_differences": {
+      "basis": {
+        "extra": [
+          "BZ"
+        ],
+        "missing": [
+          "AD",
+          "AO",
+          "AP",
+          "B",
+          "BB",
+          "BC",
+          "CJ",
+          "CS",
+          "EC",
+          "FB",
+          "J",
+          "LG",
+          "LU",
+          "NR",
+          "PK",
+          "PL",
+          "PTA",
+          "RR",
+          "RS",
+          "SC",
+          "WH"
+        ]
+      },
+      "inventory": {
+        "extra": [
+          "PTA"
+        ],
+        "missing": [
+          "AD",
+          "BB",
+          "BC",
+          "BZ",
+          "EC",
+          "FB",
+          "PL",
+          "RR",
+          "SC",
+          "WH",
+          "WR"
+        ]
+      },
+      "positioning": {
+        "extra": [],
+        "missing": [
+          "AD",
+          "BB",
+          "BC",
+          "BR",
+          "BZ",
+          "EC",
+          "FB",
+          "LG",
+          "PL",
+          "PTA",
+          "RR",
+          "SC",
+          "SH",
+          "WH",
+          "WR"
+        ]
+      },
+      "term_structure": {
+        "extra": [
+          "AD",
+          "BB",
+          "BC",
+          "EC",
+          "FB",
+          "PL",
+          "RR",
+          "WH"
+        ],
+        "missing": [
+          "BZ",
+          "LG",
+          "PTA"
+        ]
+      },
+      "technical_analysis": {
+        "extra": [],
+        "missing": [
+          "AD",
+          "BB",
+          "BC",
+          "BR",
+          "BZ",
+          "EC",
+          "FB",
+          "PL",
+          "PTA",
+          "RR",
+          "WH",
+          "WR"
+        ]
+      }
+    }
+  }
+}

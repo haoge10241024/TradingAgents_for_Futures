@@ -1,0 +1,126 @@
+============================================================
+📝 如何使用一键上传脚本
+============================================================
+
+现在有两个版本的脚本，选择一个使用即可：
+
+【版本1：一键上传脚本.bat（推荐）】
+  适合：大部分Windows用户
+  使用方法：直接双击运行
+
+【版本2：一键上传脚本.ps1（更稳定）】
+  适合：如果.bat版本有问题，使用这个
+  使用方法：
+    1. 右键点击 "一键上传脚本.ps1"
+    2. 选择 "使用PowerShell运行"
+    
+  如果没有"使用PowerShell运行"选项：
+    1. 按住Shift键，右键点击空白处
+    2. 选择 "在此处打开PowerShell窗口"
+    3. 输入：.\一键上传脚本.ps1
+    4. 如果提示"无法加载，因为在此系统上禁止运行脚本"：
+       输入：Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+       然后再次运行：.\一键上传脚本.ps1
+
+============================================================
+使用步骤
+============================================================
+
+第1步：在GitHub创建仓库
+-------------------------------
+1. 访问 https://github.com/
+2. 点击右上角 "+" → "New repository"
+3. 输入仓库名（例如：TradingAgents-Futures-AI）
+4. 选择 Public（公开）或 Private（私有）
+5. **不要勾选** "Add a README file"
+6. 点击 "Create repository"
+7. 复制仓库地址（例如：https://github.com/用户名/仓库名.git）
+
+第2步：运行上传脚本
+-------------------------------
+1. 双击 "一键上传脚本.bat"
+   或右键 "一键上传脚本.ps1" → "使用PowerShell运行"
+
+2. 粘贴刚才复制的仓库地址，按回车
+
+第3步：输入GitHub凭据
+-------------------------------
+用户名：你的GitHub用户名
+密码：Personal Access Token（重要：不是登录密码！）
+
+如何获取Token：
+1. 访问：https://github.com/settings/tokens
+2. 点击 "Generate new token" → "Generate new token (classic)"
+3. Note填写：TradingAgent Upload
+4. 勾选 "repo" 权限（第一个选项）
+5. 点击最底部 "Generate token"
+6. **复制生成的token**（以ghp_开头，只显示一次！）
+7. 在脚本提示输入密码时，粘贴这个token
+
+完成！
+-------------------------------
+所有文件和文件夹已自动上传到GitHub！
+
+============================================================
+常见问题
+============================================================
+
+Q: 脚本闪退或报错？
+A: 尝试使用 PowerShell 版本（一键上传脚本.ps1）
+
+Q: 提示"git不是内部或外部命令"？
+A: 需要先安装Git：https://git-scm.com/download/win
+
+Q: 输入密码后提示"Authentication failed"？
+A: 确保使用的是Personal Access Token，不是GitHub登录密码
+
+Q: 提示"repository not found"？
+A: 检查仓库地址是否正确，确保仓库已创建
+
+Q: PowerShell提示"禁止运行脚本"？
+A: 在PowerShell中先运行：
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+   然后再运行脚本
+
+Q: 推送很慢或卡住？
+A: 可能是网络问题，耐心等待或检查网络连接
+
+============================================================
+🔧 手动方法（如果脚本不工作）
+============================================================
+
+1. 打开PowerShell或CMD
+2. 进入项目目录：
+   cd "D:\Cursor\cursor项目\TradingAgent\TradingAgents_for_Futures"
+
+3. 依次执行以下命令：
+
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin https://github.com/用户名/仓库名.git
+   git branch -M main
+   git push -u origin main
+
+4. 输入GitHub用户名和Token
+
+============================================================
+💡 其他上传方法
+============================================================
+
+如果脚本和命令行都不工作，推荐使用GitHub Desktop：
+
+1. 下载：https://desktop.github.com/
+2. 安装并登录GitHub账号
+3. File → Add local repository
+4. 选择 TradingAgents_for_Futures 文件夹
+5. 点击 "Publish repository"
+
+完全图形化操作，无需命令行！
+
+============================================================
+
+详细教程请查看：GitHub上传完整指南.md
+
+============================================================
+

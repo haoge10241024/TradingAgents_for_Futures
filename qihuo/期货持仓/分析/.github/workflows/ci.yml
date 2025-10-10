@@ -1,0 +1,149 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, "3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
+    
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Format check with black
+      run: |
+        black --check --diff .
+    
+    - name: Import sorting check with isort
+      run: |
+        isort --check-only --diff .
+    
+    - name: Type checking with mypy
+      run: |
+        mypy --ignore-missing-imports .
+      continue-on-error: true
+    
+    - name: Security check with bandit
+      run: |
+        bandit -r . -f json -o bandit-report.json
+      continue-on-error: true
+    
+    - name: Run tests
+      run: |
+        python test_auto_skip.py
+        python test_system.py
+    
+    - name: Test Streamlit app
+      run: |
+        # Test if the app can be imported without errors
+        python -c "import streamlit_app; print('Streamlit app imports successfully')"
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety bandit
+    
+    - name: Check for security vulnerabilities
+      run: |
+        safety check
+        bandit -r . -ll
+      continue-on-error: true
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mkdocs mkdocs-material
+    
+    - name: Check documentation
+      run: |
+        # Check if all markdown files are valid
+        find . -name "*.md" -exec echo "Checking {}" \;
+        echo "Documentation check completed"
+
+  build:
+    needs: [test, security]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Create distribution
+      run: |
+        # Create a simple distribution package
+        mkdir -p dist
+        tar -czf dist/futures-analysis-${{ github.sha }}.tar.gz \
+          --exclude='.git' \
+          --exclude='__pycache__' \
+          --exclude='*.pyc' \
+          --exclude='.pytest_cache' \
+          --exclude='dist' \
+          .
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: futures-analysis-${{ github.sha }}
+        path: dist/ 

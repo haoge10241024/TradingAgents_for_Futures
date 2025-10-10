@@ -1,0 +1,28 @@
+{
+  "symbol": "NR",
+  "symbol_name": "20号胶",
+  "total_records": 4346,
+  "date_range": "20250822 ~ 20250919",
+  "position_types": [
+    "成交量",
+    "多单持仓",
+    "空单持仓"
+  ],
+  "update_time": "2025-09-19 21:42:34",
+  "update_mode": "incremental",
+  "new_records_this_update": 180,
+  "files_info": {
+    "volume_ranking.csv": {
+      "records": 1450,
+      "new_this_update": 60
+    },
+    "long_position_ranking.csv": {
+      "records": 1446,
+      "new_this_update": 60
+    },
+    "short_position_ranking.csv": {
+      "records": 1450,
+      "new_this_update": 60
+    }
+  }
+}
