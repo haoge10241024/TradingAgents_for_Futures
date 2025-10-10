@@ -8,60 +8,6 @@
 
 这是一个功能完整的AI驱动的商品期货分析系统，为期货交易提供全方位的智能分析和决策支持。
 
-## 🖼️ 系统截图
-
-### 系统首页
-<div align="center">
-  <img src="images/首页截图.png" alt="系统首页" width="800"/>
-  <p><i>系统主界面 - 支持多品种期货分析</i></p>
-</div>
-
-<div align="center">
-  <img src="images/首页截图2.png" alt="分析配置" width="800"/>
-  <p><i>分析模块配置 - 6大分析维度可选</i></p>
-</div>
-
-<div align="center">
-  <img src="images/首页截图3.png" alt="参数设置" width="800"/>
-  <p><i>参数设置 - 灵活的分析参数</i></p>
-</div>
-
-### 分析结果展示
-<div align="center">
-  <img src="images/结果截图1.png" alt="技术分析结果" width="800"/>
-  <p><i>技术分析 - 多维度技术指标分析</i></p>
-</div>
-
-<div align="center">
-  <img src="images/结果截图2.png" alt="基差分析结果" width="800"/>
-  <p><i>基差分析 - 现货期货价差研究</i></p>
-</div>
-
-<div align="center">
-  <img src="images/结果截图3.png" alt="持仓席位分析" width="800"/>
-  <p><i>持仓席位分析 - 主力机构动向追踪</i></p>
-</div>
-
-<div align="center">
-  <img src="images/结果截图4.png" alt="AI辩论系统" width="800"/>
-  <p><i>AI多空辩论 - 看涨看跌观点碰撞</i></p>
-</div>
-
-<div align="center">
-  <img src="images/结果截图5.png" alt="交易决策" width="800"/>
-  <p><i>专业交易员决策 - 策略制定</i></p>
-</div>
-
-<div align="center">
-  <img src="images/结果截图6.png" alt="风险控制" width="800"/>
-  <p><i>风险管理团队 - 风险评估</i></p>
-</div>
-
-<div align="center">
-  <img src="images/结果截图7.png" alt="最终决策" width="800"/>
-  <p><i>CIO最终决策 - 投资建议</i></p>
-</div>
-
 ### 核心功能
 
 - **📈 6大分析模块**
@@ -86,6 +32,59 @@
   - Word专业报告导出
   - 图表可视化下载
   - 多维度分析整合
+
+## 🖼️ 系统截图
+
+<div align="center">
+  <img src="images/首页截图.png" alt="系统首页" width="800"/>
+  <p><i>系统首页 - 覆盖多维度期货数据</i></p>
+</div>
+
+<div align="center">
+  <img src="images/首页截图2.png" alt="分析配置" width="800"/>
+  <p><i>数据更新页面 - 6大维度数据更新程序</i></p>
+</div>
+
+<div align="center">
+  <img src="images/首页截图3.png" alt="参数设置" width="800"/>
+  <p><i>分析配置 - 灵活的分析参数</i></p>
+</div>
+
+### 分析结果展示
+<div align="center">
+  <img src="images/结果截图1.png" alt="执行摘要" width="800"/>
+  <p><i>执行摘要 - 言简意赅的分析结果呈现</i></p>
+</div>
+
+<div align="center">
+  <img src="images/结果截图2.png" alt="AI分析师" width="800"/>
+  <p><i>多维度分析 - AI驱动的分析师</i></p>
+</div>
+
+<div align="center">
+  <img src="images/结果截图3.png" alt="分析图例" width="800"/>
+  <p><i>图例展示 - 丰富形象的分析图例</i></p>
+</div>
+
+<div align="center">
+  <img src="images/结果截图4.png" alt="AI辩论系统" width="800"/>
+  <p><i>AI多空辩论 - 多空观点碰撞</i></p>
+</div>
+
+<div align="center">
+  <img src="images/结果截图5.png" alt="交易决策" width="800"/>
+  <p><i>专业交易员决策 - 策略制定</i></p>
+</div>
+
+<div align="center">
+  <img src="images/结果截图6.png" alt="风险控制" width="800"/>
+  <p><i>风险管理团队 - 风险评估</i></p>
+</div>
+
+<div align="center">
+  <img src="images/结果截图7.png" alt="最终决策" width="800"/>
+  <p><i>CIO最终决策 - 投资建议</i></p>
+</div>
 
 ## 🚀 快速开始
 
