@@ -1,6 +1,8 @@
 # 🤝 贡献指南
 
 感谢您对商品期货AI分析系统的关注！我们欢迎各种形式的贡献。
+联系方式
+邮箱：953534947@qq.com
 
 ## 🚀 快速开始
 
@@ -256,10 +258,8 @@ git push origin feature/您的功能名称
 ## 📞 获取帮助
 
 ### 联系方式
-- 💬 [GitHub Discussions](https://github.com/haoge10241024/TradingAgents_for_Futures/discussions)
 - 📧 邮箱：953534947@qq.com
-- 🐛 [Issues](https://github.com/haoge10241024/TradingAgents_for_Futures/issues)
-
+  
 ### 常见问题
 - 查看 [FAQ](https://github.com/haoge10241024/TradingAgents_for_Futures/wiki/FAQ)
 - 阅读 [文档](https://github.com/haoge10241024/TradingAgents_for_Futures/wiki)
