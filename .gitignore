@@ -51,10 +51,7 @@ qihuo/database/update_report_*.json  # 更新报告不上传
 !qihuo/database/.gitkeep
 !qihuo/database/*/.gitkeep
 
-# CSV数据文件可以上传（示例数据）
-# 如果数据文件过大，可以取消下面的注释来排除它们
-# qihuo/database/**/*.csv
-
+# CSV数据文件 - 允许数据库目录下的关键数据
 # 输出和结果文件
 qihuo/output/
 qihuo/cache/
@@ -65,8 +62,13 @@ qihuo/trading_agents_results/
 *.csv
 *.xlsx
 *.xls
+# 允许关键数据文件上传
 !qihuo/config/*.csv
 !qihuo/config/*.xlsx
+!qihuo/database/inventory/**/*.csv
+!qihuo/database/technical_analysis/**/*.csv
+!qihuo/database/term_structure/**/*.csv
+!qihuo/database/receipt/**/*.csv
 
 # 临时文件
 temp/
@@ -89,6 +91,8 @@ temp_*.py
 *.gif
 !docs/*.png
 !docs/*.jpg
+!images/*.png
+!images/*.jpg
 
 # 测试和调试
 test_*.py
@@ -127,4 +131,8 @@ backup_*/
 # 缓存
 .cache/
 *.cache
+
+# GitHub Actions CI/CD配置（子项目的配置不需要）
+.github/
+**/.github/workflows/
 
