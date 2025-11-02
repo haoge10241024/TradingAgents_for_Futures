@@ -358,6 +358,19 @@ class BasisDataUpdater:
             print(f"  ⚠️ 失败品种列表: {', '.join(self.update_stats['failed_varieties'])}")
         
         return self.update_stats
+    
+    def update_data(self, target_date_str: str, specific_varieties: Optional[List[str]] = None) -> Dict:
+        """
+        更新数据到指定日期（与update_to_date相同，为兼容统一更新器接口）
+        
+        Args:
+            target_date_str: 目标日期 (YYYY-MM-DD格式)
+            specific_varieties: 指定品种列表，None表示全部品种
+        
+        Returns:
+            更新结果统计
+        """
+        return self.update_to_date(target_date_str, specific_varieties)
 
 def main():
     """测试主函数"""

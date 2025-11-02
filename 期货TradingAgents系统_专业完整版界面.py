@@ -434,7 +434,7 @@ class StreamlitDataManager:
                 "data_file": "inventory.csv",
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",
-                "update_script": "增量更新_完整增强版.py",
+                "update_script": "unified_futures_data_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "positioning": {
@@ -443,7 +443,7 @@ class StreamlitDataManager:
                 "data_file": "long_position_ranking.csv",
                 "date_column": "date",
                 "date_format": "%Y%m%d",
-                "update_script": "完整期货持仓数据管理系统.py",
+                "update_script": "unified_futures_data_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "term_structure": {
@@ -452,7 +452,7 @@ class StreamlitDataManager:
                 "data_file": "term_structure.csv",
                 "date_column": "date",
                 "date_format": "%Y%m%d",
-                "update_script": "完整修正版期限结构数据库更新器.py",
+                "update_script": "unified_futures_data_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "technical_analysis": {
@@ -461,7 +461,7 @@ class StreamlitDataManager:
                 "data_file": "ohlc_data.csv",
                 "date_column": "时间",
                 "date_format": "%Y-%m-%d",
-                "update_script": "期货技术分析数据获取系统.py",
+                "update_script": "unified_futures_data_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "basis": {
@@ -470,7 +470,7 @@ class StreamlitDataManager:
                 "data_file": "basis_data.csv",
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",
-                "update_script": "智能基差数据更新系统_改进版.py",
+                "update_script": "unified_futures_data_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "receipt": {
@@ -479,7 +479,7 @@ class StreamlitDataManager:
                 "data_file": "receipt.csv",
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",
-                "update_script": "仓单数据采集系统_统一命名版.py",
+                "update_script": "unified_futures_data_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             }
         }
