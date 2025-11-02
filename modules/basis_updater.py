@@ -17,7 +17,7 @@ from typing import Dict, List, Optional, Tuple
 class BasisDataUpdater:
     """基差数据更新器"""
     
-    def __init__(self, database_path: str = "D:/Cursor/cursor项目/TradingAgent/qihuo/database/basis"):
+    def __init__(self, database_path: str = "qihuo/database/basis"):
         """
         初始化基差数据更新器
         

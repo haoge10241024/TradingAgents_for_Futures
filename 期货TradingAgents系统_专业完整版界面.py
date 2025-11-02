@@ -426,7 +426,7 @@ class StreamlitDataManager:
     """Streamlit数据管理器"""
     
     def __init__(self):
-        self.database_root = Path("D:/Cursor/cursor项目/TradingAgent/qihuo/database")
+        self.database_root = Path("qihuo/database")
         self.modules_config = {
             "inventory": {
                 "name": "库存数据",
@@ -996,7 +996,7 @@ class StreamlitAnalysisManager:
         try:
             # 创建数据整合器
             integrator = FuturesAnalysisIntegrator(
-                data_root_dir=self.config.get("paths", {}).get("data_root_dir", "D:/Cursor/cursor项目/TradingAgent/qihuo/database"),
+                data_root_dir=self.config.get("paths", {}).get("data_root_dir", "qihuo/database"),
                 config=self.config.to_dict()
             )
             

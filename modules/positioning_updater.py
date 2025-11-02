@@ -35,7 +35,7 @@ SYMBOL_NAMES = {
 class PositioningDataUpdater:
     """持仓数据更新器"""
     
-    def __init__(self, database_path: str = "D:/Cursor/cursor项目/TradingAgent/qihuo/database/positioning"):
+    def __init__(self, database_path: str = "qihuo/database/positioning"):
         """
         初始化持仓数据更新器
         

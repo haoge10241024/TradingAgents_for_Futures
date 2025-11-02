@@ -43,11 +43,8 @@ class UnifiedFuturesDataUpdaterFixed:
         """初始化更新系统"""
         self.database_path = Path(database_path)
         
-        # 如果相对路径不存在，尝试绝对路径
-        if not self.database_path.exists():
-            abs_path = Path("D:/Cursor/cursor项目/TradingAgent/qihuo/database")
-            if abs_path.exists():
-                self.database_path = abs_path
+        # 确保数据库目录存在
+        self.database_path.mkdir(parents=True, exist_ok=True)
         
         print(f"🗄️ 数据库路径: {self.database_path}")
         

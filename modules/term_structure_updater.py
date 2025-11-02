@@ -20,7 +20,7 @@ warnings.filterwarnings('ignore')
 class TermStructureUpdater:
     """期限结构数据更新器"""
     
-    def __init__(self, database_path: str = "D:/Cursor/cursor项目/TradingAgent/qihuo/database/term_structure"):
+    def __init__(self, database_path: str = "qihuo/database/term_structure"):
         """
         初始化期限结构数据更新器
         

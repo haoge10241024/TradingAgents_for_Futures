@@ -34,7 +34,7 @@ SYMBOL_MAPPING = {
 class InventoryDataUpdater:
     """库存数据更新器"""
     
-    def __init__(self, database_path: str = "D:/Cursor/cursor项目/TradingAgent/qihuo/database/inventory"):
+    def __init__(self, database_path: str = "qihuo/database/inventory"):
         """
         初始化库存数据更新器
         

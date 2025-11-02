@@ -42,7 +42,7 @@ SYMBOL_MAPPING = {
 class TechnicalDataUpdater:
     """技术分析数据更新器"""
     
-    def __init__(self, database_path: str = "D:/Cursor/cursor项目/TradingAgent/qihuo/database/technical_analysis"):
+    def __init__(self, database_path: str = "qihuo/database/technical_analysis"):
         """
         初始化技术分析数据更新器
         
