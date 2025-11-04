@@ -51,13 +51,13 @@ class UnifiedFuturesDataUpdaterFixed:
         # 初始化数据检查器
         self.data_checker = UnifiedDataChecker()
         
-        # 初始化各个更新器
+        # 初始化各个更新器（传入正确的子目录路径）
         self.updaters = {
-            "basis": BasisDataUpdater(str(self.database_path)),
-            "inventory": InventoryDataUpdater(str(self.database_path)), 
-            "positioning": PositioningDataUpdater(str(self.database_path)),
-            "term_structure": TermStructureUpdater(str(self.database_path)),
-            "technical_analysis": TechnicalDataUpdater(str(self.database_path))
+            "basis": BasisDataUpdater(str(self.database_path / "basis")),
+            "inventory": InventoryDataUpdater(str(self.database_path / "inventory")), 
+            "positioning": PositioningDataUpdater(str(self.database_path / "positioning")),
+            "term_structure": TermStructureUpdater(str(self.database_path / "term_structure")),
+            "technical_analysis": TechnicalDataUpdater(str(self.database_path / "technical_analysis"))
         }
         
         # 更新顺序（基差 → 库存 → 持仓 → 期限结构 → 技术分析）
