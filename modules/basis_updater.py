@@ -321,17 +321,18 @@ class BasisDataUpdater:
                 variety_data = pd.DataFrame([{
                     'date': row['date'],
                     'symbol': variety,
-                    'spot_price': row.get('现货价格', 0),
-                    'near_contract': row.get('近月合约', ''),
-                    'near_contract_price': row.get('近月价格', 0),
-                    'dominant_contract': row.get('主力合约', ''),
-                    'dominant_contract_price': row.get('主力价格', 0),
-                    'near_month': row.get('近月月份', 0),
-                    'dominant_month': row.get('主力月份', 0),
-                    'near_basis': row.get('近月基差', 0),
-                    'dom_basis': row.get('主力基差', 0),
-                    'near_basis_rate': row.get('近月基差率', 0),
-                    'dom_basis_rate': row.get('主力基差率', 0)
+                    # 修正字段映射（原始数据的英文列名 -> 存储的字段名）
+                    'spot_price': row.get('spot_price', 0),  # 现货价格
+                    'near_contract': row.get('near_contract', ''),  # 近月合约
+                    'near_contract_price': row.get('near_contract_price', 0),  # 近月合约价格
+                    'dominant_contract': row.get('dominant_contract', ''),  # 主力合约
+                    'dominant_contract_price': row.get('dominant_contract_price', 0),  # 主力合约价格
+                    'near_month': row.get('near_month', 0),  # 近月月份
+                    'dominant_month': row.get('dom_month', 0),  # 主力月份
+                    'near_basis': row.get('near_basis', 0),  # 近月基差
+                    'dom_basis': row.get('dom_basis', 0),  # 主力基差
+                    'near_basis_rate': row.get('near_basis_rate', 0),  # 近月基差率
+                    'dom_basis_rate': row.get('dom_basis_rate', 0)  # 主力基差率
                 }])
                 
                 if self.save_variety_data(variety, variety_data):
