@@ -7,20 +7,25 @@ import pandas as pd
 
 
 class InventoryProvider:
-    """库存/仓单提供器：优先读缓存，无则回空。
+    """库存/仓单提供器：优先读取本地数据库，无则回空。
 
-    约定：
-      - 库存/系列：inventory_{SERIES}.csv （列含 [date, value] 或 [日期, 库存]）
-      - 仓单（示意，后续可扩展）：warehouse_{EXCHANGE}_{VAR}.csv
+    数据文件位置：qihuo/database/inventory/{SERIES}/inventory.csv
     """
 
-    def __init__(self, cache_dir: str = "qihuo/.data/cache") -> None:
-        self.cache_dir = Path(cache_dir)
+    def __init__(self, database_dir: str = "qihuo/database/inventory") -> None:
+        self.database_dir = Path(database_dir)
 
     def get_inventory_series(self, series: str, try_online: bool = False) -> pd.DataFrame:
-        path = self.cache_dir / f"inventory_{series}.csv"
+        # 优先从数据库读取（按品种代码）
+        path = self.database_dir / series.upper() / "inventory.csv"
         if path.exists():
             return pd.read_csv(path)
+        
+        # 兼容旧的cache路径（向后兼容）
+        cache_path = Path("qihuo/.data/cache") / f"inventory_{series}.csv"
+        if cache_path.exists():
+            return pd.read_csv(cache_path)
+            
         if try_online:
             try:
                 import akshare as ak  # type: ignore
