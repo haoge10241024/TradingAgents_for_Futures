@@ -434,7 +434,7 @@ class StreamlitDataManager:
                 "data_file": "inventory.csv",
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/inventory_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "positioning": {
@@ -443,7 +443,7 @@ class StreamlitDataManager:
                 "data_file": "positioning_summary.json",
                 "date_column": "date",
                 "date_format": "%Y%m%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/positioning_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "term_structure": {
@@ -452,7 +452,7 @@ class StreamlitDataManager:
                 "data_file": "term_structure.csv",
                 "date_column": "date",
                 "date_format": "%Y%m%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/term_structure_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "technical_analysis": {
@@ -461,7 +461,7 @@ class StreamlitDataManager:
                 "data_file": "ohlc_data.csv",
                 "date_column": "时间",
                 "date_format": "%Y-%m-%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/technical_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "basis": {
@@ -470,7 +470,7 @@ class StreamlitDataManager:
                 "data_file": "basis_data.csv",
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/basis_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "receipt": {
