@@ -1,11 +1,11 @@
 {
   "symbol": "FU",
-  "record_count": 50,
+  "record_count": 5,
   "date_range": {
-    "start": "2025-06-16T00:00:00",
-    "end": "2025-08-22T00:00:00"
+    "start": "2025-10-29T00:00:00",
+    "end": "2025-11-04T00:00:00"
   },
-  "last_updated": "2025-08-23T09:00:46.410464",
+  "last_updated": "2025-11-05T22:33:43.042264",
   "columns": [
     "date",
     "symbol",

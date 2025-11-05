@@ -440,7 +440,7 @@ class StreamlitDataManager:
             "positioning": {
                 "name": "持仓席位",
                 "path": self.database_root / "positioning", 
-                "data_file": "long_position_ranking.csv",
+                "data_file": "positioning_summary.json",
                 "date_column": "date",
                 "date_format": "%Y%m%d",
                 "update_script": "unified_futures_data_updater.py",
@@ -532,6 +532,17 @@ class StreamlitDataManager:
                                 
                                 if data_file.exists():
                                     try:
+                                        # 支持CSV和JSON格式
+                                        if data_file.suffix == '.json':
+                                            import json
+                                            with open(data_file, 'r', encoding='utf-8') as f:
+                                                json_data = json.load(f)
+                                            # JSON summary文件：视为有效数据
+                                            if isinstance(json_data, dict):
+                                                commodity_folders.append(commodity)
+                                                total_records += 1  # JSON文件计为1条记录
+                                                continue  # 跳过CSV处理逻辑
+                                        
                                         df = pd.read_csv(data_file, encoding='utf-8')
                                         if not df.empty:
                                             commodity_folders.append(commodity)
