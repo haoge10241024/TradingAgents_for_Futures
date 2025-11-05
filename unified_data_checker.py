@@ -22,7 +22,7 @@ MODULES_CONFIG = {
     "basis": {
         "name": "基差数据",
         "path": DATABASE_ROOT / "basis",
-        "data_file": "basis_summary.json",  # 实际文件是JSON格式
+        "data_file": "basis_data.csv",  # CSV格式
         "date_column": "date"
     },
     "inventory": {
