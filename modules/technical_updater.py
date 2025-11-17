@@ -27,14 +27,14 @@ warnings.filterwarnings('ignore')
 
 # 品种合约映射
 SYMBOL_MAPPING = {
-    'A': 'a2409', 'AG': 'ag2412', 'AL': 'al2411', 'AU': 'au2412', 'B': 'b2409',
-    'BU': 'bu2412', 'C': 'c2409', 'CF': 'CF409', 'CU': 'cu2411', 'CY': 'CY409',
+    'A': 'a2409', 'AG': 'ag2412', 'AL': 'al2411', 'AO': 'ao2412', 'AP': 'AP501', 'AU': 'au2412', 'B': 'b2409',
+    'BU': 'bu2412', 'C': 'c2409', 'CF': 'CF409', 'CJ': 'CJ501', 'CS': 'cs2409', 'CU': 'cu2411', 'CY': 'CY409',
     'EB': 'eb2411', 'EG': 'eg2411', 'FG': 'FG409', 'FU': 'fu2409', 'HC': 'hc2410',
     'I': 'i2409', 'J': 'j2409', 'JD': 'jd2409', 'JM': 'jm2409', 'L': 'l2409',
-    'LC': 'lc2409', 'LH': 'lh2409', 'M': 'm2409', 'MA': 'MA409', 'NI': 'ni2411',
-    'OI': 'OI409', 'P': 'p2409', 'PB': 'pb2411', 'PF': 'PF409', 'PG': 'pg2411',
-    'PP': 'pp2409', 'RB': 'rb2410', 'RM': 'RM409', 'RU': 'ru2409', 'SA': 'SA409',
-    'SF': 'sf2411', 'SI': 'si2409', 'SM': 'sm2409', 'SN': 'sn2411', 'SP': 'sp2409',
+    'LC': 'lc2409', 'LG': 'LG501', 'LH': 'lh2409', 'LU': 'lu2409', 'M': 'm2409', 'MA': 'MA409', 'NI': 'ni2411', 'NR': 'nr2407',
+    'OI': 'OI409', 'P': 'p2409', 'PB': 'pb2411', 'PF': 'PF409', 'PG': 'pg2411', 'PK': 'PK409',
+    'PP': 'pp2409', 'PR': 'PR501', 'PS': 'ps2409', 'PX': 'PX409', 'RB': 'rb2410', 'RM': 'RM409', 'RS': 'RS501', 'RU': 'ru2409', 
+    'SA': 'SA409', 'SC': 'sc2412', 'SF': 'sf2411', 'SH': 'SH501', 'SI': 'si2409', 'SM': 'sm2409', 'SN': 'sn2411', 'SP': 'sp2409',
     'SR': 'SR409', 'SS': 'ss2410', 'TA': 'TA409', 'UR': 'UR409', 'V': 'v2409',
     'Y': 'y2409', 'ZN': 'zn2411'
 }
@@ -208,6 +208,78 @@ class TechnicalDataUpdater:
         except Exception as e:
             print(f"    ⚠️ 新浪主力接口失败: {str(e)[:50]}")
         
+        # 方法4: 使用get_futures_daily接口（按交易所获取）
+        try:
+            print(f"    📡 方法4: get_futures_daily(按交易所)")
+            
+            # 品种到交易所的映射
+            VARIETY_TO_EXCHANGE = {
+                'CU': 'SHFE', 'AL': 'SHFE', 'ZN': 'SHFE', 'PB': 'SHFE', 'NI': 'SHFE', 
+                'SN': 'SHFE', 'AU': 'SHFE', 'AG': 'SHFE', 'RB': 'SHFE', 'WR': 'SHFE', 
+                'HC': 'SHFE', 'FU': 'SHFE', 'BU': 'SHFE', 'RU': 'SHFE', 'AO': 'SHFE',
+                'A': 'DCE', 'B': 'DCE', 'C': 'DCE', 'CS': 'DCE', 'M': 'DCE', 'Y': 'DCE', 
+                'P': 'DCE', 'L': 'DCE', 'V': 'DCE', 'PP': 'DCE', 'J': 'DCE', 'JM': 'DCE', 
+                'I': 'DCE', 'JD': 'DCE', 'LH': 'DCE', 'EB': 'DCE', 'EG': 'DCE', 'PG': 'DCE', 'RR': 'DCE',
+                'SR': 'CZCE', 'CF': 'CZCE', 'TA': 'CZCE', 'MA': 'CZCE', 'FG': 'CZCE', 
+                'RM': 'CZCE', 'OI': 'CZCE', 'CY': 'CZCE', 'AP': 'CZCE', 'CJ': 'CZCE', 
+                'UR': 'CZCE', 'SA': 'CZCE', 'PF': 'CZCE', 'PK': 'CZCE', 'SF': 'CZCE', 
+                'SM': 'CZCE', 'ZC': 'CZCE', 'RS': 'CZCE', 'PX': 'CZCE', 'PR': 'CZCE', 
+                'SH': 'CZCE', 'PL': 'CZCE', 'JR': 'CZCE', 'LR': 'CZCE', 'WH': 'CZCE', 
+                'PM': 'CZCE', 'RI': 'CZCE', 'LG': 'CZCE',
+                'SC': 'INE', 'LU': 'INE', 'NR': 'INE', 'BC': 'INE', 'EC': 'INE',
+                'LC': 'GFEX', 'SI': 'GFEX', 'SP': 'GFEX', 'SS': 'GFEX', 'AD': 'GFEX', 
+                'OP': 'GFEX', 'PS': 'GFEX', 'BR': 'GFEX'
+            }
+            
+            exchange = VARIETY_TO_EXCHANGE.get(symbol)
+            if exchange:
+                # 计算日期范围（最近10天）
+                from datetime import datetime, timedelta
+                end = datetime.now()
+                start = start_date if start_date else (end - timedelta(days=10))
+                start_str = start.strftime('%Y%m%d')
+                end_str = end.strftime('%Y%m%d')
+                
+                df = ak.get_futures_daily(start_date=start_str, end_date=end_str, market=exchange)
+                
+                if df is not None and not df.empty:
+                    # 筛选该品种的数据
+                    if 'variety' in df.columns:
+                        df_variety = df[df['variety'] == symbol].copy()
+                        if not df_variety.empty:
+                            print(f"    ✅ get_futures_daily成功: {len(df_variety)} 条记录")
+                            processed_df = self._process_get_futures_daily_data(df_variety, symbol, start_date)
+                            if not processed_df.empty:
+                                return processed_df
+                print(f"    ⚠️ get_futures_daily: 无该品种数据")
+            else:
+                print(f"    ⚠️ 未找到品种对应的交易所")
+                
+        except Exception as e:
+            print(f"    ⚠️ get_futures_daily失败: {str(e)[:50]}")
+        
+        # 方法5: 对于某些品种，尝试按品种调用futures_main_sina（带日期参数）
+        # 包括：大商所品种 + 广期所的SP/SS + 部分郑商所小众品种（CJ/LG）
+        if symbol in ['A', 'B', 'C', 'CS', 'M', 'Y', 'P', 'L', 'V', 'PP', 'J', 'JM', 'I', 'JD', 'LH', 'EB', 'EG', 'PG', 'RR', 'SP', 'SS', 'CJ', 'LG']:
+            try:
+                print(f"    📡 方法5: futures_main_sina({symbol}0, 带日期)")
+                from datetime import datetime, timedelta
+                end = datetime.now()
+                start = start_date if start_date else (end - timedelta(days=10))
+                start_str = start.strftime('%Y%m%d')
+                end_str = end.strftime('%Y%m%d')
+                
+                df = ak.futures_main_sina(symbol=f"{symbol}0", start_date=start_str, end_date=end_str)
+                
+                if df is not None and not df.empty:
+                    print(f"    ✅ futures_main_sina(带日期)成功: {len(df)} 条记录")
+                    processed_df = self._process_sina_main_data(df, symbol, start_date)
+                    if not processed_df.empty:
+                        return processed_df
+                        
+            except Exception as e:
+                print(f"    ⚠️ futures_main_sina(带日期)失败: {str(e)[:50]}")
+        
         print(f"    ❌ 所有接口都失败")
         return None
     
@@ -362,6 +434,80 @@ class TechnicalDataUpdater:
             
         except Exception as e:
             print(f"    ❌ 新浪主力数据处理失败: {e}")
+            return pd.DataFrame()
+    
+    def _process_get_futures_daily_data(self, df: pd.DataFrame, symbol: str, start_date: Optional[datetime] = None) -> pd.DataFrame:
+        """处理get_futures_daily返回的数据"""
+        try:
+            print(f"    🔧 处理get_futures_daily数据...")
+            
+            # get_futures_daily返回的是多个合约的数据，需要聚合成主力合约
+            # 按日期分组，选择成交量最大的合约作为当日主力
+            if '时间' not in df.columns and 'date' in df.columns:
+                # 转换日期格式
+                if df['date'].dtype in ['int64', 'float64', 'int32']:
+                    df['时间'] = pd.to_datetime(df['date'].astype(str), format='%Y%m%d', errors='coerce')
+                else:
+                    df['时间'] = pd.to_datetime(df['date'], errors='coerce')
+            elif '时间' not in df.columns:
+                print(f"    ❌ 未找到日期列")
+                return pd.DataFrame()
+            
+            # 确保数值列是数值类型
+            numeric_cols = ['open', 'high', 'low', 'close', 'volume', 'open_interest']
+            for col in numeric_cols:
+                if col in df.columns:
+                    df[col] = pd.to_numeric(df[col], errors='coerce')
+            
+            # 按日期分组，选择成交量最大的合约
+            result_data = []
+            for date, group in df.groupby('时间'):
+                # 选择成交量最大的记录
+                if 'volume' in group.columns:
+                    main_contract = group.loc[group['volume'].idxmax()]
+                else:
+                    main_contract = group.iloc[0]
+                result_data.append(main_contract)
+            
+            if not result_data:
+                print(f"    ℹ️ 无有效数据")
+                return pd.DataFrame()
+            
+            df = pd.DataFrame(result_data)
+            
+            # 标准化列名
+            column_mapping = {
+                'open': '开盘', 'high': '最高', 'low': '最低', 
+                'close': '收盘', 'volume': '成交量', 'open_interest': '持仓量'
+            }
+            
+            for old_col, new_col in column_mapping.items():
+                if old_col in df.columns:
+                    df = df.rename(columns={old_col: new_col})
+            
+            # 确保时间格式
+            df['时间'] = pd.to_datetime(df['时间'], errors='coerce')
+            df = df.dropna(subset=['时间'])
+            
+            # 如果指定了开始日期，过滤数据
+            if start_date:
+                df = df[df['时间'] > start_date]
+            
+            if df.empty:
+                print(f"    ℹ️ 无新数据需要更新")
+                return pd.DataFrame()
+            
+            # 排序并重置索引
+            df = df.sort_values('时间').reset_index(drop=True)
+            
+            print(f"    ✅ get_futures_daily数据处理完成: {len(df)} 条记录")
+            if len(df) > 0:
+                print(f"    📅 日期范围: {df['时间'].min().strftime('%Y-%m-%d')} ~ {df['时间'].max().strftime('%Y-%m-%d')}")
+            
+            return df
+            
+        except Exception as e:
+            print(f"    ❌ get_futures_daily数据处理失败: {e}")
             return pd.DataFrame()
     
     def _process_general_data(self, df: pd.DataFrame, symbol: str, start_date: Optional[datetime] = None) -> pd.DataFrame:
@@ -593,16 +739,43 @@ class TechnicalDataUpdater:
             # 重新计算技术指标（基于完整数据）
             combined_df = self.calculate_technical_indicators(combined_df)
             
-            # 保存数据
-            combined_df.to_csv(ohlc_file, index=False, encoding='utf-8')
+            # 保存数据（使用UTF-8-BOM让Excel正确识别）
+            combined_df.to_csv(ohlc_file, index=False, encoding='utf-8-sig')
             
             # 另外保存技术指标数据
             tech_file = variety_dir / "technical_indicators.csv"
-            tech_columns = [col for col in combined_df.columns if col not in ['时间', '开盘', '最高', '最低', '收盘', '成交量', '持仓量']]
+            # 排除基础OHLC列和无用的原始数据列
+            excluded_cols = [
+                '时间', '开盘', '最高', '最低', '收盘', '成交量', '持仓量',
+                'date', 'symbol', 'pre_settle', 'settle', 'turnover', 'index',
+                '涨跌', '涨跌幅', '成交额', 'variety', 'open', 'high', 'low', 'close', 'volume', 'open_interest'
+            ]
+            tech_columns = [col for col in combined_df.columns if col not in excluded_cols]
             
             if tech_columns:
                 tech_df = combined_df[['时间'] + tech_columns]
-                tech_df.to_csv(tech_file, index=False, encoding='utf-8')
+                tech_df.to_csv(tech_file, index=False, encoding='utf-8-sig')
+            
+            # 保存主要指标数据（OHLC + 常用核心指标）
+            main_file = variety_dir / "main_indicators.csv"
+            main_indicator_columns = [
+                'MA5', 'MA10', 'MA20', 'MA60',  # 均线
+                'MACD', 'MACD_SIGNAL', 'MACD_HIST',  # MACD
+                'RSI14',  # RSI
+                'BOLL_UPPER', 'BOLL_MIDDLE', 'BOLL_LOWER',  # 布林带
+                'ATR14', 'CCI20',  # ATR和CCI
+                'VOL_MA20', 'OBV',  # 成交量指标
+                'OI_MA20', 'OI_CHANGE', 'OI_CHANGE_PCT'  # 持仓量指标
+            ]
+            
+            # 选择存在的列
+            available_main_cols = [col for col in main_indicator_columns if col in combined_df.columns]
+            base_cols = ['时间', '开盘', '最高', '最低', '收盘', '成交量']
+            if '持仓量' in combined_df.columns:
+                base_cols.append('持仓量')
+            
+            main_df = combined_df[base_cols + available_main_cols]
+            main_df.to_csv(main_file, index=False, encoding='utf-8-sig')
             
             return True
             
@@ -728,19 +901,80 @@ class TechnicalDataUpdater:
         return self.update_to_date(target_date_str, specific_varieties)
 
 def main():
-    """测试主函数"""
+    """交互式主函数"""
+    print("=" * 80)
+    print("📊 技术分析数据更新器")
+    print("=" * 80)
+    
     updater = TechnicalDataUpdater()
     
     # 获取现有数据状态
+    print("\n🔍 正在检查现有数据状态...")
     varieties, info = updater.get_existing_data_status()
     
-    # 模拟更新前3个品种到今天
-    target_date = datetime.now().strftime('%Y-%m-%d')
-    test_varieties = ['RB', 'CU', 'AL'] if varieties else None
+    print(f"\n📦 已有品种数量: {len(varieties)} 个")
+    if varieties:
+        print(f"   品种列表: {', '.join(sorted(varieties)[:20])}{'...' if len(varieties) > 20 else ''}")
+        
+        # 显示最新日期
+        if info:
+            latest_dates = {}
+            for v, v_info in info.items():
+                if v_info.get('latest_date'):
+                    latest_dates[v] = v_info['latest_date']
+            if latest_dates:
+                overall_latest = max(latest_dates.values())
+                print(f"📅 当前最新数据日期: {overall_latest.strftime('%Y-%m-%d')}")
+    else:
+        print("📅 当前暂无数据")
     
-    result = updater.update_to_date(target_date, test_varieties)
+    # 用户输入更新参数
+    print("\n" + "=" * 80)
+    print("请输入更新参数:")
+    print("-" * 80)
     
-    print(f"\n🎯 更新结果: {result}")
+    # 输入目标日期
+    default_date = datetime.now().strftime('%Y-%m-%d')
+    target_date_input = input(f"📅 目标日期 (格式: YYYY-MM-DD, 直接回车使用今天 {default_date}): ").strip()
+    target_date = target_date_input if target_date_input else default_date
+    
+    # 验证日期格式
+    try:
+        datetime.strptime(target_date, '%Y-%m-%d')
+    except ValueError:
+        print(f"❌ 日期格式错误，使用默认日期: {default_date}")
+        target_date = default_date
+    
+    # 输入品种
+    varieties_input = input(f"🎯 要更新的品种 (输入品种代码用逗号分隔，如 RB,CU,AL；直接回车更新全部): ").strip()
+    
+    if varieties_input:
+        specific_varieties = [v.strip().upper() for v in varieties_input.split(',')]
+        print(f"\n✅ 将更新指定品种: {', '.join(specific_varieties)}")
+    else:
+        specific_varieties = None
+        print(f"\n✅ 将更新所有品种")
+    
+    # 确认
+    print("\n" + "=" * 80)
+    print(f"📋 更新配置:")
+    print(f"   目标日期: {target_date}")
+    print(f"   更新品种: {'全部' if not specific_varieties else ', '.join(specific_varieties)}")
+    print(f"   更新模式: 智能增量更新（自动从最新数据补全到目标日期）")
+    print("=" * 80)
+    
+    confirm = input("\n确认开始更新？(y/N): ").strip().lower()
+    if confirm != 'y':
+        print("❌ 已取消更新")
+        return
+    
+    # 执行更新
+    print("\n🚀 开始更新...")
+    result = updater.update_to_date(target_date, specific_varieties)
+    
+    print(f"\n" + "=" * 80)
+    print("🎯 更新完成!")
+    print("=" * 80)
 
 if __name__ == "__main__":
     main()

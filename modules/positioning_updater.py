@@ -689,7 +689,7 @@ class PositioningDataUpdater:
                     combined_df = new_df
                     new_records_count += len(new_df)
                 
-                combined_df.to_csv(file_path, index=False, encoding='utf-8')
+                combined_df.to_csv(file_path, index=False, encoding='utf-8-sig')
             
             # 保存摘要信息
             summary_file = variety_dir / "positioning_summary.json"
@@ -852,19 +852,79 @@ class PositioningDataUpdater:
         return self.update_to_date(target_date_str, specific_varieties)
 
 def main():
-    """测试主函数"""
+    """交互式主函数"""
+    print("=" * 80)
+    print("🎯 持仓席位数据更新器")
+    print("=" * 80)
+    
     updater = PositioningDataUpdater()
     
     # 获取现有数据状态
+    print("\n🔍 正在检查现有数据状态...")
     varieties, info = updater.get_existing_data_status()
     
-    # 模拟更新前3个品种到今天
-    target_date = datetime.now().strftime('%Y-%m-%d')
-    test_varieties = ['RB', 'CU', 'AL'] if varieties else None
+    print(f"\n📦 已有品种数量: {len(varieties)} 个")
+    if varieties:
+        print(f"   品种列表: {', '.join(sorted(varieties)[:20])}{'...' if len(varieties) > 20 else ''}")
+    else:
+        print("📅 当前暂无数据")
     
-    result = updater.update_to_date(target_date, lookback_days=3, specific_varieties=test_varieties)
+    # 用户输入更新参数
+    print("\n" + "=" * 80)
+    print("请输入更新参数:")
+    print("-" * 80)
     
-    print(f"\n🎯 更新结果: {result}")
+    # 输入目标日期
+    default_date = datetime.now().strftime('%Y-%m-%d')
+    target_date_input = input(f"📅 目标日期 (格式: YYYY-MM-DD, 直接回车使用今天 {default_date}): ").strip()
+    target_date = target_date_input if target_date_input else default_date
+    
+    # 验证日期格式
+    try:
+        datetime.strptime(target_date, '%Y-%m-%d')
+    except ValueError:
+        print(f"❌ 日期格式错误，使用默认日期: {default_date}")
+        target_date = default_date
+    
+    # 输入回溯天数
+    lookback_input = input(f"⏮️ 回溯天数 (默认3天，用于获取多个交易日数据): ").strip()
+    try:
+        lookback_days = int(lookback_input) if lookback_input else 3
+    except ValueError:
+        print(f"❌ 输入错误，使用默认值: 3天")
+        lookback_days = 3
+    
+    # 输入品种
+    varieties_input = input(f"🎯 要更新的品种 (输入品种代码用逗号分隔，如 RB,CU,AL；直接回车更新全部): ").strip()
+    
+    if varieties_input:
+        specific_varieties = [v.strip().upper() for v in varieties_input.split(',')]
+        print(f"\n✅ 将更新指定品种: {', '.join(specific_varieties)}")
+    else:
+        specific_varieties = None
+        print(f"\n✅ 将更新所有品种")
+    
+    # 确认
+    print("\n" + "=" * 80)
+    print(f"📋 更新配置:")
+    print(f"   目标日期: {target_date}")
+    print(f"   回溯天数: {lookback_days} 天")
+    print(f"   更新品种: {'全部' if not specific_varieties else ', '.join(specific_varieties)}")
+    print(f"   更新模式: 智能增量更新（只更新缺失的数据）")
+    print("=" * 80)
+    
+    confirm = input("\n确认开始更新？(y/N): ").strip().lower()
+    if confirm != 'y':
+        print("❌ 已取消更新")
+        return
+    
+    # 执行更新
+    print("\n🚀 开始更新...")
+    result = updater.update_to_date(target_date, lookback_days=lookback_days, specific_varieties=specific_varieties)
+    
+    print(f"\n" + "=" * 80)
+    print("🎯 更新完成!")
+    print("=" * 80)
 
 if __name__ == "__main__":
     main()

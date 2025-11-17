@@ -55,7 +55,7 @@ def install_and_import():
 class ProfessionalFuturesNewsAnalyzer:
     """专业版期货新闻分析器"""
     
-    def __init__(self, deepseek_api_key, serper_key="d3654e36956e0bf331e901886c49c602cea72eb1"):
+    def __init__(self, deepseek_api_key, serper_key="04555ec0f2ce150d1cb628c7a80e2e433e193535"):
         self.deepseek_api_key = deepseek_api_key
         self.deepseek_url = "https://api.deepseek.com/v1/chat/completions"
         

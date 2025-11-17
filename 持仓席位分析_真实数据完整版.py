@@ -65,15 +65,29 @@ class RealDataPositioningSystem:
         
         # 读取多头持仓排名
         long_file = os.path.join(symbol_path, "long_position_ranking.csv")
-        long_df = pd.read_csv(long_file)
+        long_df = pd.read_csv(long_file, encoding='utf-8')
         
         # 读取空头持仓排名
         short_file = os.path.join(symbol_path, "short_position_ranking.csv")
-        short_df = pd.read_csv(short_file)
+        short_df = pd.read_csv(short_file, encoding='utf-8')
         
         # 读取成交量排名
         volume_file = os.path.join(symbol_path, "volume_ranking.csv")
-        volume_df = pd.read_csv(volume_file)
+        volume_df = pd.read_csv(volume_file, encoding='utf-8')
+        
+        # 确保列名正确（处理可能的编码问题）
+        def fix_column_names(df):
+            """修复可能的列名编码问题"""
+            # 常见的中文列名映射
+            try:
+                df.columns = df.columns.str.strip()
+            except:
+                pass
+            return df
+        
+        long_df = fix_column_names(long_df)
+        short_df = fix_column_names(short_df)
+        volume_df = fix_column_names(volume_df)
         
         return {
             'summary': summary,
@@ -119,13 +133,23 @@ class RealDataPositioningSystem:
         # 计算知情度指标
         member_info = {}
         
+        # 灵活获取列名（处理编码问题）
+        member_col = '会员简称' if '会员简称' in latest_volume.columns else latest_volume.columns[1]
+        pos_col = '持仓量' if '持仓量' in latest_volume.columns else latest_volume.columns[-4]
+        
         for _, member in latest_volume.iterrows():
-            member_name = member['会员简称']
-            volume = member['持仓量']
-            
-            # 查找对应的多空持仓
-            long_pos = latest_long[latest_long['会员简称'] == member_name]['持仓量'].sum()
-            short_pos = latest_short[latest_short['会员简称'] == member_name]['持仓量'].sum()
+            try:
+                member_name = member[member_col]
+                volume = float(member[pos_col]) if member[pos_col] else 0
+                
+                # 查找对应的多空持仓
+                long_match = latest_long[latest_long[member_col] == member_name]
+                short_match = latest_short[latest_short[member_col] == member_name]
+                long_pos = float(long_match[pos_col].sum()) if len(long_match) > 0 else 0
+                short_pos = float(short_match[pos_col].sum()) if len(short_match) > 0 else 0
+            except (KeyError, IndexError, ValueError, TypeError) as e:
+                print(f"⚠️ 跳过席位数据提取错误: {e}")
+                continue
             
             if volume > 0:
                 informed_ratio = (long_pos + short_pos) / volume

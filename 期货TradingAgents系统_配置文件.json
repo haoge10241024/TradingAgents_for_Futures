@@ -16,7 +16,7 @@
   
   "api_settings": {
     "deepseek": {
-      "api_key": "YOUR_DEEPSEEK_API_KEY_HERE",
+      "api_key": "sk-293dec7fabb54606b4f8d4f606da3383",
       "base_url": "https://api.deepseek.com/v1",
       "model": "deepseek-chat",
       "reasoning_model": "deepseek-reasoner",
@@ -24,7 +24,7 @@
       "temperature": 0.1
     },
     "serper": {
-      "api_key": "YOUR_SERPER_API_KEY_HERE",
+      "api_key": "04555ec0f2ce150d1cb628c7a80e2e433e193535",
       "base_url": "https://google.serper.dev/search"
     }
   },
