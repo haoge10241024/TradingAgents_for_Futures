@@ -7,17 +7,20 @@ import pandas as pd
 
 
 class BasisProvider:
-    """基差数据提供器：优先读取缓存，无则尝试在线获取（后续可补）。"""
+    """基差数据提供器：优先读取本地数据库，无则尝试在线获取。
+    
+    数据文件位置：qihuo/database/basis/{SYMBOL}/basis_data.csv
+    """
 
-    def __init__(self, cache_dir: str = "qihuo/.data/cache") -> None:
-        self.cache_dir = Path(cache_dir)
+    def __init__(self, database_dir: str = "qihuo/database/basis") -> None:
+        self.database_dir = Path(database_dir)
 
     def get_spot_price_daily(self, symbol: str, start: Optional[str] = None, end: Optional[str] = None, try_online: bool = False) -> pd.DataFrame:
         """读取或获取基差日度数据。
-        约定缓存CSV命名：basis_{SYMBOL}.csv
-        若无缓存，可在后续扩展为调用 ak.futures_spot_price_daily。
+        数据文件：qihuo/database/basis/{SYMBOL}/basis_data.csv
         """
-        path = self.cache_dir / f"basis_{symbol.upper()}.csv"
+        # 优先从数据库读取
+        path = self.database_dir / symbol.upper() / "basis_data.csv"
         if path.exists():
             df = pd.read_csv(path)
             if "date" in df.columns:
@@ -28,6 +31,19 @@ class BasisProvider:
             if end:
                 df = df[df["date"] <= pd.to_datetime(end)]
             return df
+        
+        # 兼容旧的cache路径（向后兼容）
+        cache_path = Path("qihuo/.data/cache") / f"basis_{symbol.upper()}.csv"
+        if cache_path.exists():
+            df = pd.read_csv(cache_path)
+            if "date" in df.columns:
+                df["date"] = pd.to_datetime(df["date"], errors="coerce")
+            if start:
+                df = df[df["date"] >= pd.to_datetime(start)]
+            if end:
+                df = df[df["date"] <= pd.to_datetime(end)]
+            return df
+        
         # 在线获取（可选）
         if try_online:
             try:
@@ -92,10 +108,11 @@ class BasisProvider:
                 # 去重与排序
                 out = out.drop_duplicates().sort_values('date').reset_index(drop=True)
 
-                # 写入缓存
+                # 写入缓存到数据库目录
                 try:
-                    self.cache_dir.mkdir(parents=True, exist_ok=True)
-                    out.to_csv(self.cache_dir / f"basis_{symbol.upper()}.csv", index=False, encoding="utf-8-sig")
+                    target_dir = self.database_dir / symbol.upper()
+                    target_dir.mkdir(parents=True, exist_ok=True)
+                    out.to_csv(target_dir / "basis_data.csv", index=False, encoding="utf-8-sig")
                 except Exception:
                     pass
                 return out

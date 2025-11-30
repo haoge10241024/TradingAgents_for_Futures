@@ -1,0 +1,23 @@
+{
+  "start_time": "2025-11-06T09:25:40.333161",
+  "target_date": "2025-11-05",
+  "modules": {
+    "basis": {
+      "module": "basis",
+      "status": "error",
+      "error": "'BasisDataUpdater' object has no attribute 'update_data'",
+      "elapsed_time": 1.9311904907226562e-05,
+      "updated_varieties": [],
+      "failed_varieties": []
+    }
+  },
+  "summary": {
+    "total_modules": 1,
+    "successful_modules": 0,
+    "failed_modules": 1,
+    "total_updated_varieties": [],
+    "total_failed_varieties": [],
+    "total_elapsed_time": 1.9311904907226562e-05
+  },
+  "end_time": "2025-11-06T09:26:04.316493"
+}

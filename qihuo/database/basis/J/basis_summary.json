@@ -1,0 +1,24 @@
+{
+  "symbol": "J",
+  "record_count": 7,
+  "date_range": {
+    "start": "2025-11-06T00:00:00",
+    "end": "2025-11-14T00:00:00"
+  },
+  "last_updated": "2025-11-15T17:15:35.593759",
+  "columns": [
+    "date",
+    "symbol",
+    "spot_price",
+    "near_contract",
+    "near_contract_price",
+    "dominant_contract",
+    "dominant_contract_price",
+    "near_month",
+    "dominant_month",
+    "near_basis",
+    "dom_basis",
+    "near_basis_rate",
+    "dom_basis_rate"
+  ]
+}

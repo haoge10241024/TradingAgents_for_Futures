@@ -434,16 +434,20 @@ class StreamlitDataManager:
                 "data_file": "inventory.csv",
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/inventory_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "positioning": {
                 "name": "持仓席位",
                 "path": self.database_root / "positioning", 
-                "data_file": "long_position_ranking.csv",
+                "data_file": "long_position_ranking.csv",  # 使用CSV文件而非JSON
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",  # CSV文件中的日期格式是YYYY-MM-DD
+<<<<<<< HEAD
                 "update_script": "unified_futures_data_updater.py",
+=======
+                "update_script": "modules/positioning_updater.py",
+>>>>>>> 354a84f5e735adfcb2d1f87cea9a90d5f1264cc2
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "term_structure": {
@@ -452,7 +456,7 @@ class StreamlitDataManager:
                 "data_file": "term_structure.csv",
                 "date_column": "date",
                 "date_format": "%Y%m%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/term_structure_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "technical_analysis": {
@@ -461,7 +465,7 @@ class StreamlitDataManager:
                 "data_file": "ohlc_data.csv",
                 "date_column": "时间",
                 "date_format": "%Y-%m-%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/technical_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "basis": {
@@ -470,7 +474,7 @@ class StreamlitDataManager:
                 "data_file": "basis_data.csv",
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/basis_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "receipt": {
@@ -479,7 +483,7 @@ class StreamlitDataManager:
                 "data_file": "receipt.csv",
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",
-                "update_script": "unified_futures_data_updater.py",
+                "update_script": "modules/receipt_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             }
         }
@@ -532,6 +536,17 @@ class StreamlitDataManager:
                                 
                                 if data_file.exists():
                                     try:
+                                        # 支持CSV和JSON格式
+                                        if data_file.suffix == '.json':
+                                            import json
+                                            with open(data_file, 'r', encoding='utf-8') as f:
+                                                json_data = json.load(f)
+                                            # JSON summary文件：视为有效数据
+                                            if isinstance(json_data, dict):
+                                                commodity_folders.append(commodity)
+                                                total_records += 1  # JSON文件计为1条记录
+                                                continue  # 跳过CSV处理逻辑
+                                        
                                         df = pd.read_csv(data_file, encoding='utf-8')
                                         if not df.empty:
                                             commodity_folders.append(commodity)

@@ -131,14 +131,14 @@ class InventoryDataUpdater:
                         time.sleep(random.uniform(1, 3))
                     continue
                 
-                # 标准化数据
+                # 标准化数据（使用英文列名，避免编码问题）
                 new_df = raw_df.rename(columns={"日期": "date", "库存": "value"})
                 new_df["date"] = pd.to_datetime(new_df["date"])
                 new_df["value"] = pd.to_numeric(new_df["value"], errors="coerce")
                 
                 # 计算增减列（基于前一日数据计算）
                 new_df = new_df.sort_values('date').reset_index(drop=True)
-                new_df["增减"] = new_df["value"].diff().fillna(0)
+                new_df["change"] = new_df["value"].diff().fillna(0)
                 
                 new_df = new_df.dropna(subset=["value"]).drop_duplicates(subset=["date"]).sort_values("date")
                 
@@ -195,8 +195,8 @@ class InventoryDataUpdater:
                     # 有新数据，合并
                     combined_df = pd.concat([existing_df, new_data]).drop_duplicates(subset=['date']).sort_values('date').reset_index(drop=True)
                     
-                    # 重新计算全部增减值
-                    combined_df["增减"] = combined_df["value"].diff().fillna(0)
+                    # 重新计算全部增减值（使用英文列名）
+                    combined_df["change"] = combined_df["value"].diff().fillna(0)
                     
                     latest_added = max(added_dates).strftime('%Y-%m-%d')
                     print(f"    ✅ {symbol}: 新增 {len(added_dates)} 条记录 (至 {latest_added})")
@@ -216,8 +216,8 @@ class InventoryDataUpdater:
                 self.update_stats["new_varieties"].append(symbol)
                 self.update_stats["total_new_records"] += len(new_data)
             
-            # 保存数据
-            combined_df.to_csv(inventory_file, index=False, encoding='utf-8')
+            # 保存数据（使用UTF-8-BOM让Excel正确识别中文）
+            combined_df.to_csv(inventory_file, index=False, encoding='utf-8-sig')
             return True
             
         except Exception as e:
@@ -320,19 +320,80 @@ class InventoryDataUpdater:
         return self.update_to_date(target_date_str, specific_varieties)
 
 def main():
-    """测试主函数"""
+    """交互式主函数"""
+    print("=" * 80)
+    print("📦 库存数据更新器")
+    print("=" * 80)
+    
     updater = InventoryDataUpdater()
     
     # 获取现有数据状态
+    print("\n🔍 正在检查现有数据状态...")
     varieties, info = updater.get_existing_data_status()
     
-    # 模拟更新前3个品种到今天
-    target_date = datetime.now().strftime('%Y-%m-%d')
-    test_varieties = ['RB', 'CU', 'AL'] if varieties else None
+    print(f"\n📦 已有品种数量: {len(varieties)} 个")
+    if varieties:
+        print(f"   品种列表: {', '.join(sorted(varieties)[:20])}{'...' if len(varieties) > 20 else ''}")
+        
+        # 显示最新日期
+        if info:
+            latest_dates = {}
+            for v, v_info in info.items():
+                if v_info.get('latest_date'):
+                    latest_dates[v] = v_info['latest_date']
+            if latest_dates:
+                overall_latest = max(latest_dates.values())
+                print(f"📅 当前最新数据日期: {overall_latest.strftime('%Y-%m-%d')}")
+    else:
+        print("📅 当前暂无数据")
     
-    result = updater.update_to_date(target_date, test_varieties)
+    # 用户输入更新参数
+    print("\n" + "=" * 80)
+    print("请输入更新参数:")
+    print("-" * 80)
     
-    print(f"\n🎯 更新结果: {result}")
+    # 输入目标日期
+    default_date = datetime.now().strftime('%Y-%m-%d')
+    target_date_input = input(f"📅 目标日期 (格式: YYYY-MM-DD, 直接回车使用今天 {default_date}): ").strip()
+    target_date = target_date_input if target_date_input else default_date
+    
+    # 验证日期格式
+    try:
+        datetime.strptime(target_date, '%Y-%m-%d')
+    except ValueError:
+        print(f"❌ 日期格式错误，使用默认日期: {default_date}")
+        target_date = default_date
+    
+    # 输入品种
+    varieties_input = input(f"🎯 要更新的品种 (输入品种代码用逗号分隔，如 RB,CU,AL；直接回车更新全部): ").strip()
+    
+    if varieties_input:
+        specific_varieties = [v.strip().upper() for v in varieties_input.split(',')]
+        print(f"\n✅ 将更新指定品种: {', '.join(specific_varieties)}")
+    else:
+        specific_varieties = None
+        print(f"\n✅ 将更新所有品种")
+    
+    # 确认
+    print("\n" + "=" * 80)
+    print(f"📋 更新配置:")
+    print(f"   目标日期: {target_date}")
+    print(f"   更新品种: {'全部' if not specific_varieties else ', '.join(specific_varieties)}")
+    print(f"   更新模式: 智能增量更新（只更新缺失的数据）")
+    print("=" * 80)
+    
+    confirm = input("\n确认开始更新？(y/N): ").strip().lower()
+    if confirm != 'y':
+        print("❌ 已取消更新")
+        return
+    
+    # 执行更新
+    print("\n🚀 开始更新...")
+    result = updater.update_to_date(target_date, specific_varieties)
+    
+    print(f"\n" + "=" * 80)
+    print("🎯 更新完成!")
+    print("=" * 80)
 
 if __name__ == "__main__":
     main()

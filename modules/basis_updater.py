@@ -17,13 +17,18 @@ from typing import Dict, List, Optional, Tuple
 class BasisDataUpdater:
     """基差数据更新器"""
     
-    def __init__(self, database_path: str = "qihuo/database/basis"):
+    def __init__(self, database_path: str = None):
         """
         初始化基差数据更新器
         
         Args:
-            database_path: 数据库路径
+            database_path: 数据库路径，默认为项目根目录下的 qihuo/database/basis
         """
+        if database_path is None:
+            # 使用相对路径，从当前文件位置找到项目根目录
+            current_file = Path(__file__).resolve()
+            project_root = current_file.parent.parent  # modules -> TradingAgent
+            database_path = project_root / "qihuo" / "database" / "basis"
         self.base_dir = Path(database_path)
         self.base_dir.mkdir(parents=True, exist_ok=True)
         
@@ -221,7 +226,7 @@ class BasisDataUpdater:
                 self.update_stats["total_new_records"] += len(new_data)
             
             # 保存CSV数据
-            combined_df.to_csv(basis_file, index=False, encoding='utf-8')
+            combined_df.to_csv(basis_file, index=False, encoding='utf-8-sig')
             
             # 更新摘要信息
             summary_info = {
@@ -247,12 +252,13 @@ class BasisDataUpdater:
             self.update_stats["error_messages"].append(f"{variety}: 保存失败 - {str(e)}")
             return False
     
-    def update_to_date(self, target_date_str: str, specific_varieties: Optional[List[str]] = None) -> Dict:
+    def update_to_date(self, target_date_str: str, start_date_str: Optional[str] = None, specific_varieties: Optional[List[str]] = None) -> Dict:
         """
         更新数据到指定日期
         
         Args:
             target_date_str: 目标日期 (YYYY-MM-DD格式)
+            start_date_str: 开始日期 (YYYY-MM-DD格式，可选)，如果不指定则从现有数据的最新日期开始
             specific_varieties: 指定品种列表，None表示全部品种
         
         Returns:
@@ -270,6 +276,20 @@ class BasisDataUpdater:
             except ValueError:
                 raise ValueError(f"日期格式错误: {target_date_str}，请使用 YYYY-MM-DD 或 YYYYMMDD 格式")
         
+        # 解析开始日期（如果提供）
+        start_date = None
+        if start_date_str:
+            try:
+                start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+                print(f"📅 指定开始日期: {start_date.strftime('%Y-%m-%d')}")
+            except ValueError:
+                try:
+                    start_date = datetime.strptime(start_date_str, '%Y%m%d')
+                    print(f"📅 指定开始日期: {start_date.strftime('%Y-%m-%d')}")
+                except ValueError:
+                    print(f"⚠️ 开始日期格式错误，将使用现有数据的最新日期")
+                    start_date = None
+        
         self.update_stats["start_time"] = datetime.now()
         self.update_stats["target_date"] = target_date_str
         
@@ -278,8 +298,16 @@ class BasisDataUpdater:
         # 获取现有数据状态
         latest_date, existing_varieties, variety_info = self.get_existing_data_status()
         
+        # 确定实际的开始日期
+        if start_date:
+            # 使用用户指定的开始日期
+            actual_start_date = start_date
+        else:
+            # 使用现有数据的最新日期
+            actual_start_date = latest_date
+        
         # 计算更新日期
-        update_dates = self.calculate_update_dates(latest_date, target_date)
+        update_dates = self.calculate_update_dates(actual_start_date, target_date)
         
         if not update_dates:
             print("✅ 数据已是最新，无需更新")
@@ -317,21 +345,22 @@ class BasisDataUpdater:
                 if specific_varieties and variety not in specific_varieties:
                     continue
                 
-                # 构造该品种的数据
+                # 构造该品种的数据（使用正确的列名从akshare数据中获取）
                 variety_data = pd.DataFrame([{
                     'date': row['date'],
                     'symbol': variety,
-                    'spot_price': row.get('现货价格', 0),
-                    'near_contract': row.get('近月合约', ''),
-                    'near_contract_price': row.get('近月价格', 0),
-                    'dominant_contract': row.get('主力合约', ''),
-                    'dominant_contract_price': row.get('主力价格', 0),
-                    'near_month': row.get('近月月份', 0),
-                    'dominant_month': row.get('主力月份', 0),
-                    'near_basis': row.get('近月基差', 0),
-                    'dom_basis': row.get('主力基差', 0),
-                    'near_basis_rate': row.get('近月基差率', 0),
-                    'dom_basis_rate': row.get('主力基差率', 0)
+                    # akshare返回的是完整的英文列名
+                    'spot_price': row.get('spot_price', 0),  # 现货价格
+                    'near_contract': row.get('near_contract', ''),  # 近月合约
+                    'near_contract_price': row.get('near_contract_price', 0),  # 近月价格
+                    'dominant_contract': row.get('dominant_contract', ''),  # 主力合约
+                    'dominant_contract_price': row.get('dominant_contract_price', 0),  # 主力价格
+                    'near_month': row.get('near_month', 0),  # 近月月份
+                    'dominant_month': row.get('dominant_month', 0),  # 主力月份
+                    'near_basis': row.get('near_basis', 0),  # 近月基差
+                    'dom_basis': row.get('dom_basis', 0),  # 主力基差
+                    'near_basis_rate': row.get('near_basis_rate', 0),  # 近月基差率
+                    'dom_basis_rate': row.get('dom_basis_rate', 0)  # 主力基差率
                 }])
                 
                 if self.save_variety_data(variety, variety_data):
@@ -359,31 +388,92 @@ class BasisDataUpdater:
         
         return self.update_stats
     
-    def update_data(self, target_date_str: str, specific_varieties: Optional[List[str]] = None) -> Dict:
+    def update_data(self, target_date_str: str, start_date_str: Optional[str] = None, specific_varieties: Optional[List[str]] = None) -> Dict:
         """
         更新数据到指定日期（与update_to_date相同，为兼容统一更新器接口）
         
         Args:
             target_date_str: 目标日期 (YYYY-MM-DD格式)
+            start_date_str: 开始日期 (YYYY-MM-DD格式，可选)
             specific_varieties: 指定品种列表，None表示全部品种
         
         Returns:
             更新结果统计
         """
-        return self.update_to_date(target_date_str, specific_varieties)
+        return self.update_to_date(target_date_str, start_date_str, specific_varieties)
 
 def main():
-    """测试主函数"""
+    """交互式主函数"""
+    print("=" * 80)
+    print("📊 基差数据更新器")
+    print("=" * 80)
+    
     updater = BasisDataUpdater()
     
     # 获取现有数据状态
+    print("\n🔍 正在检查现有数据状态...")
     latest_date, varieties, info = updater.get_existing_data_status()
     
-    # 模拟更新到今天
-    target_date = datetime.now().strftime('%Y-%m-%d')
-    result = updater.update_to_date(target_date)
+    if latest_date:
+        print(f"\n📅 当前最新数据日期: {latest_date.strftime('%Y-%m-%d')}")
+    else:
+        print(f"\n📅 当前暂无数据")
     
-    print(f"\n🎯 更新结果: {result}")
+    print(f"📦 已有品种数量: {len(varieties)} 个")
+    if varieties:
+        print(f"   品种列表: {', '.join(sorted(varieties)[:20])}{'...' if len(varieties) > 20 else ''}")
+    
+    # 用户输入更新参数
+    print("\n" + "=" * 80)
+    print("请输入更新参数:")
+    print("-" * 80)
+    
+    # 只输入目标日期，自动从最新数据开始智能增量更新
+    default_date = datetime.now().strftime('%Y-%m-%d')
+    target_date_input = input(f"📅 目标日期 (格式: YYYY-MM-DD, 直接回车使用今天 {default_date}): ").strip()
+    target_date = target_date_input if target_date_input else default_date
+    
+    # 验证目标日期格式
+    try:
+        datetime.strptime(target_date, '%Y-%m-%d')
+    except ValueError:
+        print(f"❌ 目标日期格式错误，使用默认日期: {default_date}")
+        target_date = default_date
+    
+    # 输入品种
+    varieties_input = input(f"🎯 要更新的品种 (输入品种代码用逗号分隔，如 RB,CU,AL；直接回车更新全部): ").strip()
+    
+    if varieties_input:
+        specific_varieties = [v.strip().upper() for v in varieties_input.split(',')]
+        print(f"\n✅ 将更新指定品种: {', '.join(specific_varieties)}")
+    else:
+        specific_varieties = None
+        print(f"\n✅ 将更新所有品种")
+    
+    # 确认
+    print("\n" + "=" * 80)
+    print(f"📋 更新配置:")
+    if latest_date:
+        print(f"   从最新数据日期: {latest_date.strftime('%Y-%m-%d')}")
+    else:
+        print(f"   首次更新: 将获取完整历史数据")
+    print(f"   更新到日期: {target_date}")
+    print(f"   更新品种: {'全部' if not specific_varieties else ', '.join(specific_varieties)}")
+    print(f"   更新模式: 智能增量更新（只更新缺失的数据）")
+    print("=" * 80)
+    
+    confirm = input("\n确认开始更新？(y/N): ").strip().lower()
+    if confirm != 'y':
+        print("❌ 已取消更新")
+        return
+    
+    # 执行更新（不传入start_date，自动智能更新）
+    print("\n🚀 开始更新...")
+    result = updater.update_to_date(target_date, start_date_str=None, specific_varieties=specific_varieties)
+    
+    print(f"\n" + "=" * 80)
+    print("🎯 更新完成!")
+    print("=" * 80)
 
 if __name__ == "__main__":
     main()

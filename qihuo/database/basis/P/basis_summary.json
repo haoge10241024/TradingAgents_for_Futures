@@ -1,11 +1,11 @@
 {
   "symbol": "P",
-  "record_count": 50,
+  "record_count": 48,
   "date_range": {
-    "start": "2025-06-16T00:00:00",
-    "end": "2025-08-22T00:00:00"
+    "start": "2025-09-02T00:00:00",
+    "end": "2025-11-14T00:00:00"
   },
-  "last_updated": "2025-08-23T09:00:45.783708",
+  "last_updated": "2025-11-15T17:15:35.565790",
   "columns": [
     "date",
     "symbol",

@@ -103,7 +103,7 @@ class UltimatePerfectedInventoryAnalyzer:
         self.receipt_apis = {
             'SHFE': ak.futures_shfe_warehouse_receipt,
             'CZCE': ak.futures_czce_warehouse_receipt, 
-            'DCE': ak.futures_dce_warehouse_receipt,
+            'DCE': ak.futures_warehouse_receipt_dce,  # 正确的函数名
             'GFEX': ak.futures_gfex_warehouse_receipt
         }
         

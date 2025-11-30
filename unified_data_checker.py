@@ -22,7 +22,7 @@ MODULES_CONFIG = {
     "basis": {
         "name": "基差数据",
         "path": DATABASE_ROOT / "basis",
-        "data_file": "basis_data.csv",
+        "data_file": "basis_data.csv",  # CSV格式
         "date_column": "date"
     },
     "inventory": {
@@ -34,7 +34,7 @@ MODULES_CONFIG = {
     "positioning": {
         "name": "持仓数据",
         "path": DATABASE_ROOT / "positioning", 
-        "data_file": "long_position_ranking.csv",
+        "data_file": "positioning_summary.json",  # 实际文件是JSON格式
         "date_column": "date"
     },
     "term_structure": {
@@ -129,43 +129,56 @@ class UnifiedDataChecker:
             
             if variety_file.exists():
                 try:
-                    # 读取数据
-                    df = pd.read_csv(variety_file)
-                    
-                    if len(df) > 0 and date_column in df.columns:
-                        # 处理日期列 - 统一处理逻辑
-                        if df[date_column].dtype == 'object':
-                            # 尝试解析日期
-                            try:
-                                df[date_column] = pd.to_datetime(df[date_column])
-                            except:
-                                # 如果是20250816这种格式
-                                df[date_column] = pd.to_datetime(df[date_column], format='%Y%m%d', errors='coerce')
-                        elif df[date_column].dtype in ['int64', 'float64']:
-                            # 数字格式的日期，如20250816
-                            df[date_column] = pd.to_datetime(df[date_column].astype(str), format='%Y%m%d', errors='coerce')
-                        else:
-                            df[date_column] = pd.to_datetime(df[date_column])
-                        
-                        # 去掉无效日期
-                        df = df.dropna(subset=[date_column])
-                        
-                        if len(df) > 0:
+                    # 读取数据（支持CSV和JSON格式）
+                    if variety_file.suffix == '.json':
+                        import json
+                        with open(variety_file, 'r', encoding='utf-8') as f:
+                            json_data = json.load(f)
+                        # JSON summary文件特殊处理：标记为有数据
+                        if isinstance(json_data, dict):
                             variety_info.update({
-                                "records": len(df),
-                                "start_date": df[date_column].min(),
-                                "end_date": df[date_column].max(),
+                                "records": 1,  # JSON summary文件
                                 "file_exists": True,
                                 "status": "has_data"
                             })
+                            module_info["total_records"] += 1
+                    else:
+                        df = pd.read_csv(variety_file)
+                        
+                        if len(df) > 0 and date_column in df.columns:
+                            # 处理日期列 - 统一处理逻辑
+                            if df[date_column].dtype == 'object':
+                                # 尝试解析日期
+                                try:
+                                    df[date_column] = pd.to_datetime(df[date_column])
+                                except:
+                                    # 如果是20250816这种格式
+                                    df[date_column] = pd.to_datetime(df[date_column], format='%Y%m%d', errors='coerce')
+                            elif df[date_column].dtype in ['int64', 'float64']:
+                                # 数字格式的日期，如20250816
+                                df[date_column] = pd.to_datetime(df[date_column].astype(str), format='%Y%m%d', errors='coerce')
+                            else:
+                                df[date_column] = pd.to_datetime(df[date_column])
                             
-                            module_info["total_records"] += len(df)
+                            # 去掉无效日期
+                            df = df.dropna(subset=[date_column])
                             
-                            # 更新模块整体日期范围
-                            if module_info["date_range"]["start"] is None or df[date_column].min() < module_info["date_range"]["start"]:
-                                module_info["date_range"]["start"] = df[date_column].min()
-                            if module_info["date_range"]["end"] is None or df[date_column].max() > module_info["date_range"]["end"]:
-                                module_info["date_range"]["end"] = df[date_column].max()
+                            if len(df) > 0:
+                                variety_info.update({
+                                    "records": len(df),
+                                    "start_date": df[date_column].min(),
+                                    "end_date": df[date_column].max(),
+                                    "file_exists": True,
+                                    "status": "has_data"
+                                })
+                                
+                                module_info["total_records"] += len(df)
+                                
+                                # 更新模块整体日期范围
+                                if module_info["date_range"]["start"] is None or df[date_column].min() < module_info["date_range"]["start"]:
+                                    module_info["date_range"]["start"] = df[date_column].min()
+                                if module_info["date_range"]["end"] is None or df[date_column].max() > module_info["date_range"]["end"]:
+                                    module_info["date_range"]["end"] = df[date_column].max()
                         
                 except Exception as e:
                     variety_info["status"] = f"error: {str(e)[:50]}"

@@ -739,8 +739,8 @@ class TechnicalDataUpdater:
             # 重新计算技术指标（基于完整数据）
             combined_df = self.calculate_technical_indicators(combined_df)
             
-            # 保存数据
-            combined_df.to_csv(ohlc_file, index=False, encoding='utf-8')
+            # 保存数据（使用UTF-8-BOM让Excel正确识别）
+            combined_df.to_csv(ohlc_file, index=False, encoding='utf-8-sig')
             
             # 另外保存技术指标数据
             tech_file = variety_dir / "technical_indicators.csv"
@@ -754,7 +754,28 @@ class TechnicalDataUpdater:
             
             if tech_columns:
                 tech_df = combined_df[['时间'] + tech_columns]
-                tech_df.to_csv(tech_file, index=False, encoding='utf-8')
+                tech_df.to_csv(tech_file, index=False, encoding='utf-8-sig')
+            
+            # 保存主要指标数据（OHLC + 常用核心指标）
+            main_file = variety_dir / "main_indicators.csv"
+            main_indicator_columns = [
+                'MA5', 'MA10', 'MA20', 'MA60',  # 均线
+                'MACD', 'MACD_SIGNAL', 'MACD_HIST',  # MACD
+                'RSI14',  # RSI
+                'BOLL_UPPER', 'BOLL_MIDDLE', 'BOLL_LOWER',  # 布林带
+                'ATR14', 'CCI20',  # ATR和CCI
+                'VOL_MA20', 'OBV',  # 成交量指标
+                'OI_MA20', 'OI_CHANGE', 'OI_CHANGE_PCT'  # 持仓量指标
+            ]
+            
+            # 选择存在的列
+            available_main_cols = [col for col in main_indicator_columns if col in combined_df.columns]
+            base_cols = ['时间', '开盘', '最高', '最低', '收盘', '成交量']
+            if '持仓量' in combined_df.columns:
+                base_cols.append('持仓量')
+            
+            main_df = combined_df[base_cols + available_main_cols]
+            main_df.to_csv(main_file, index=False, encoding='utf-8-sig')
             
             # 保存主要指标数据（OHLC + 常用核心指标）
             main_file = variety_dir / "main_indicators.csv"
