@@ -27,8 +27,8 @@ from io import BytesIO
 
 warnings.filterwarnings('ignore')
 
-# 项目路径配置
-BASE_DIR = Path(r"D:\Cursor\cursor项目\TradingAgent")
+# 项目路径配置 - 使用相对路径自动定位项目根目录
+BASE_DIR = Path(__file__).parent
 TECHNICAL_ROOT = BASE_DIR / "qihuo" / "database" / "technical_analysis"
 OUTPUT_DIR = BASE_DIR / "qihuo" / "output" / "enhanced_technical_analysis"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -36,7 +36,7 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 # API配置
 DEEPSEEK_API_KEY = "sk-293dec7fabb54606b4f8d4f606da3383"
 DEEPSEEK_API_URL = "https://api.deepseek.com"
-SERPER_API_KEY = "d3654e36956e0bf331e901886c49c602cea72eb1"
+SERPER_API_KEY = "04555ec0f2ce150d1cb628c7a80e2e433e193535"
 SERPER_API_URL = "https://google.serper.dev/search"
 
 # 期货品种配置

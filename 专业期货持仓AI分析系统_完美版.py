@@ -40,7 +40,7 @@ DEEPSEEK_MODEL_CHAT = "deepseek-chat"
 DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1/chat/completions"
 
 # Serper API配置
-SERPER_API_KEY = "d3654e36956e0bf331e901886c49c602cea72eb1"
+SERPER_API_KEY = "04555ec0f2ce150d1cb628c7a80e2e433e193535"
 SERPER_BASE_URL = "https://google.serper.dev/search"
 
 # 品种中文名称映射

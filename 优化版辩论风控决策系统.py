@@ -12,8 +12,9 @@
 5. 纯中文输出，无Markdown符号
 
 作者: AI Assistant  
-版本: 2.0.0
+版本: 2.0.1
 创建时间: 2025-01-19
+更新时间: 2025-01-19
 """
 
 import json
@@ -24,6 +25,18 @@ from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from enum import Enum
+import os
+
+# ============================================================================
+# 全局DEBUG开关配置
+# ============================================================================
+# 设置环境变量 TRADING_DEBUG=1 启用调试模式，TRADING_DEBUG=0 或不设置则关闭
+ENABLE_DEBUG = os.getenv('TRADING_DEBUG', '0') == '1'
+
+def debug_print(*args, **kwargs):
+    """全局DEBUG打印函数 - 可通过环境变量控制"""
+    if ENABLE_DEBUG:
+        print(*args, **kwargs)
 
 def safe_format_percent(value, default="未知"):
     """安全格式化百分比值"""
@@ -1319,16 +1332,16 @@ class ProfessionalTrader:
             if response.get("success"):
                 decision_text = response["content"]
                 # 🔥 DEBUG: 打印AI生成的原始内容（清理前）
-                print("=" * 80)
-                print("🔍 AI生成的原始内容（清理前，前2000字符）:")
-                print(decision_text[:2000])
-                print("=" * 80)
+                debug_print("=" * 80)
+                debug_print("🔍 AI生成的原始内容（清理前，前2000字符）:")
+                debug_print(decision_text[:2000])
+                debug_print("=" * 80)
                 # 🔧 清理重复内容
                 decision_text = self._clean_duplicate_sections(decision_text)
-                print("=" * 80)
-                print("🔍 清理后的内容（前1000字符）:")
-                print(decision_text[:1000])
-                print("=" * 80)
+                debug_print("=" * 80)
+                debug_print("🔍 清理后的内容（前1000字符）:")
+                debug_print(decision_text[:1000])
+                debug_print("=" * 80)
             else:
                 decision_text = f"API调用失败: {response.get('error', '未知错误')}"
             trading_decision = self._parse_trading_decision(decision_text, analysis_state.commodity, analysis_state)
@@ -1661,7 +1674,7 @@ class ProfessionalTrader:
         try:
             import re
             
-            print("DEBUG: 开始清理重复章节")
+            debug_print("DEBUG: 开始清理重复章节")
             
             # 🔥 第一步：标准化章节标题格式，移除空格和换行符
             text = re.sub(r'【\s*([^】\s]+)\s*】', r'【\1】', text)
@@ -1701,7 +1714,7 @@ class ProfessionalTrader:
                         if re.search(r'【[^】]+】', remaining_text):
                             # 发现重复，直接截断到第一个【风险提示】结束
                             text = text[:risk_end_pos].rstrip()
-                            print("DEBUG: 检测到重复章节，已强力截断")
+                            debug_print("DEBUG: 检测到重复章节，已强力截断")
             
             # 🔥 第五步：移除明显的重复内容块和问题内容
             # 移除孤立的【符号和空章节
@@ -1719,7 +1732,7 @@ class ProfessionalTrader:
             
             # 🔥🔥🔥 新增：超级宽松匹配（优先执行）- 只要遇到换行+任意字符+"执行计划"就删除
             text = re.sub(r'\n+[^\n]*执行计划[^\n]*\n.*$', '', text, flags=re.DOTALL)
-            print("DEBUG: [超级宽松] 执行计划正则清理完成")
+            debug_print("DEBUG: [超级宽松] 执行计划正则清理完成")
             
             # 格式1: **执行计划：**（最常见）
             text = re.sub(r'\n+\s*\*\*\s*执行计划\s*[：:]\s*\*\*.*$', '', text, flags=re.DOTALL)
@@ -1729,28 +1742,28 @@ class ProfessionalTrader:
             text = re.sub(r'\n+\s*\*\*\s*执行计划\s*\*\*.*$', '', text, flags=re.DOTALL)
             # 格式4: 超宽松匹配（兜底）- 只要包含"执行计划"就删除到结尾
             if '执行计划' in text:
-                print("DEBUG: [兜底] 检测到'执行计划'关键词")
+                debug_print("DEBUG: [兜底] 检测到'执行计划'关键词")
                 exec_plan_pos = text.rfind('执行计划')  # 找到最后一次出现
-                print(f"DEBUG: [兜底] 位置={exec_plan_pos}, 前后文本='{text[max(0,exec_plan_pos-20):exec_plan_pos+20]}'")
+                debug_print(f"DEBUG: [兜底] 位置={exec_plan_pos}, 前后文本='{text[max(0,exec_plan_pos-20):exec_plan_pos+20]}'")
                 # 确认不是在正文中（检查前面是否有换行）
                 if exec_plan_pos > 10:  # 不在开头
                     before_text = text[max(0, exec_plan_pos-10):exec_plan_pos]
-                    print(f"DEBUG: [兜底] before_text='{before_text}', 包含换行={chr(10) in before_text}")
+                    debug_print(f"DEBUG: [兜底] before_text='{before_text}', 包含换行={chr(10) in before_text}")
                     if '\n' in before_text:  # 前面有换行，说明是独立段落
                         text = text[:exec_plan_pos].rstrip()
-                        print("DEBUG: [兜底] ✅ 成功删除'执行计划'到文件结尾")
+                        debug_print("DEBUG: [兜底] ✅ 成功删除'执行计划'到文件结尾")
                     else:
-                        print("DEBUG: [兜底] ⚠️ before_text不包含换行，不删除")
+                        debug_print("DEBUG: [兜底] ⚠️ before_text不包含换行，不删除")
                 else:
-                    print(f"DEBUG: [兜底] ⚠️ 位置{exec_plan_pos}<=10，不删除")
+                    debug_print(f"DEBUG: [兜底] ⚠️ 位置{exec_plan_pos}<=10，不删除")
             else:
-                print("DEBUG: [兜底] 未检测到'执行计划'关键词")
+                debug_print("DEBUG: [兜底] 未检测到'执行计划'关键词")
             
             # 清理孤立的【符号和markdown符号（可能是截断留下的）
             text = re.sub(r'\n\s*【\s*$', '', text)
             text = re.sub(r'\n\s*\*\*\s*$', '', text)  # 孤立的星号
             text = text.rstrip()
-            print("DEBUG: 执行计划清理完成")
+            debug_print("DEBUG: 执行计划清理完成")
             
             # 🔥 新增：移除所有"详见xxx章节"的偷懒内容
             text = re.sub(r'详见.*?章节', '', text)
@@ -1808,7 +1821,7 @@ class ProfessionalTrader:
                 if separator_match:
                     end_pos += separator_match.end()
                 text = text[:end_pos].rstrip()
-                print("DEBUG: ✅ 检测到【附录结束】标记，已精确截断")
+                debug_print("DEBUG: ✅ 检测到【附录结束】标记，已精确截断")
             else:
                 # 🔥🔥🔥 如果没有【附录结束】，使用原有逻辑处理【风险提示】
                 risk_match = re.search(r'【风险提示】', text)
@@ -1826,7 +1839,7 @@ class ProfessionalTrader:
                     if new_format_match:
                         risk_end = risk_start + new_format_match.end()
                         text = text[:risk_end].rstrip()
-                        print("DEBUG: [新格式] 精确截断到【风险提示】新格式结束")
+                        debug_print("DEBUG: [新格式] 精确截断到【风险提示】新格式结束")
                     else:
                         # 旧格式：主要风险因素、不确定性因素、监控要点
                         risk_content_match = re.search(
@@ -1838,14 +1851,14 @@ class ProfessionalTrader:
                         if risk_content_match:
                             risk_end = risk_start + risk_content_match.end()
                             text = text[:risk_end].rstrip()
-                            print("DEBUG: [旧格式] 精确截断到【风险提示】3行内容结束")
+                            debug_print("DEBUG: [旧格式] 精确截断到【风险提示】3行内容结束")
                         else:
                             # 方法2：简化版，直接查找"监控要点："所在行的结尾
                             monitoring_match = re.search(r'监控要点：[^\n]*', risk_section)
                             if monitoring_match:
                                 risk_end = risk_start + monitoring_match.end()
                                 text = text[:risk_end].rstrip()
-                                print("DEBUG: [方法2] 截断到监控要点行结束")
+                                debug_print("DEBUG: [方法2] 截断到监控要点行结束")
                             else:
                                 # 方法3：如果上面都没匹配到，保守处理
                                 lines = text[risk_start:].split('\n')
@@ -1857,9 +1870,9 @@ class ProfessionalTrader:
                                     if i >= 10:
                                         break
                                 text = text[:risk_start] + '\n'.join(risk_lines).rstrip()
-                                print("DEBUG: [方法3] 保守截断到【风险提示】+内容行")
+                                debug_print("DEBUG: [方法3] 保守截断到【风险提示】+内容行")
                     
-                    print("DEBUG: 终极强力截断完成，移除【风险提示】后的所有重复内容")
+                    debug_print("DEBUG: 终极强力截断完成，移除【风险提示】后的所有重复内容")
             
             # 🔥 第六步：终极重复章节清理 - 精确重建法
             # 使用精确的章节边界识别和内容提取
@@ -1927,18 +1940,18 @@ class ProfessionalTrader:
                     )
                     if risk_standard_match:
                         section_content = risk_standard_match.group(1).strip()
-                        print(f"DEBUG: [风险提示] 精确截断到标准3行格式")
+                        debug_print(f"DEBUG: [风险提示] 精确截断到标准3行格式")
                     else:
                         # 方法2：查找"监控要点"所在行，截断到行尾
                         monitoring_match = re.search(r'(【风险提示】.*?监控要点：[^\n]*)', section_content, re.DOTALL)
                         if monitoring_match:
                             section_content = monitoring_match.group(1).strip()
-                            print(f"DEBUG: [风险提示] 截断到监控要点行尾")
+                            debug_print(f"DEBUG: [风险提示] 截断到监控要点行尾")
                         else:
                             # 方法3：保守处理，只保留前10行
                             lines = section_content.split('\n')
                             section_content = '\n'.join(lines[:10])
-                            print(f"DEBUG: [风险提示] 保守截断到前10行")
+                            debug_print(f"DEBUG: [风险提示] 保守截断到前10行")
                     
                     # 🔥 再次强力清理：删除任何"执行计划"相关内容
                     if '执行计划' in section_content:
@@ -1948,10 +1961,10 @@ class ProfessionalTrader:
                         last_newline = before_exec.rfind('\n')
                         if last_newline != -1:
                             section_content = section_content[:last_newline].strip()
-                            print(f"DEBUG: [风险提示] 强力删除'执行计划'及其后内容")
+                            debug_print(f"DEBUG: [风险提示] 强力删除'执行计划'及其后内容")
                 
                 section_contents[section] = section_content
-                print(f"DEBUG: 精确提取章节: {section}")
+                debug_print(f"DEBUG: 精确提取章节: {section}")
             
             # 重新组装文本
             if section_contents:
@@ -1961,7 +1974,7 @@ class ProfessionalTrader:
                         rebuilt_text.append(section_contents[section])
                 
                 text = '\n\n'.join(rebuilt_text)
-                print("DEBUG: 精确重建完成，彻底消除重复")
+                debug_print("DEBUG: 精确重建完成，彻底消除重复")
             
             # 🔥 第七步：最终清理
             lines = text.split('\n')
@@ -1979,25 +1992,25 @@ class ProfessionalTrader:
             if '执行计划' in text:
                 print("⚠️ WARNING: 最终文本中依然包含'执行计划'，执行终极清理")
                 exec_pos = text.rfind('执行计划')  # 找到最后一次出现
-                print(f"DEBUG: [终极兜底] 执行计划位置={exec_pos}, 前后文本='{text[max(0,exec_pos-50):exec_pos+50]}'")
+                debug_print(f"DEBUG: [终极兜底] 执行计划位置={exec_pos}, 前后文本='{text[max(0,exec_pos-50):exec_pos+50]}'")
                 
                 # 回退到前一个换行符
                 before_exec = text[:exec_pos]
                 last_newline = before_exec.rfind('\n')
                 if last_newline != -1:
                     text = text[:last_newline].strip()
-                    print("DEBUG: [终极兜底] ✅ 成功删除'执行计划'到文件结尾")
+                    debug_print("DEBUG: [终极兜底] ✅ 成功删除'执行计划'到文件结尾")
                 else:
                     # 如果前面没有换行符，直接截断到"执行计划"之前
                     text = text[:exec_pos].strip()
-                    print("DEBUG: [终极兜底] ✅ 直接截断到'执行计划'之前")
+                    debug_print("DEBUG: [终极兜底] ✅ 直接截断到'执行计划'之前")
             else:
-                print("DEBUG: [终极兜底] 未检测到'执行计划'，清理完成")
+                debug_print("DEBUG: [终极兜底] 未检测到'执行计划'，清理完成")
             
             return text
             
         except Exception as e:
-            print(f"DEBUG: 清理重复章节时出错: {str(e)}")
+            debug_print(f"DEBUG: 清理重复章节时出错: {str(e)}")
             # 如果清理失败，至少尝试基本的截断
             try:
                 import re
@@ -10642,7 +10655,7 @@ CIO决策逻辑：严格基于交易员专业分析和辩论量化结果，{winn
                 return "看空"
             else:
                 # 🚨 最后防线：基于技术面倾向强制选择，绝不允许中性
-                print("🐛 DEBUG: 无法明确判断方向，使用默认逻辑")
+                debug_print("🐛 DEBUG: 无法明确判断方向，使用默认逻辑")
                 return "谨慎看多"  # 可根据具体市场环境调整
     
     def _build_confidence_decision_matrix(self, directional_confidence: str, 
@@ -11212,7 +11225,7 @@ class OptimizedTradingAgentsSystem:
         self.logger.info(f"开始{commodity}完整优化分析流程")
         
         # 第一阶段：激烈辩论
-        print("🐛 DEBUG: 开始第一阶段：多空激烈辩论")
+        debug_print("🐛 DEBUG: 开始第一阶段：多空激烈辩论")
         self.logger.info("第一阶段：多空激烈辩论")
         debate_result = await self.debate_system.conduct_heated_debate(
             analysis_state, debate_rounds
@@ -11220,7 +11233,7 @@ class OptimizedTradingAgentsSystem:
         print(f"🐛 DEBUG: 辩论完成，bull_score={debate_result.overall_bull_score} (type: {type(debate_result.overall_bull_score)})")
         
         # 第二阶段：交易员专业决策
-        print("🐛 DEBUG: 开始第二阶段：交易员专业决策")
+        debug_print("🐛 DEBUG: 开始第二阶段：交易员专业决策")
         self.logger.info("第二阶段：交易员专业决策")
         trading_decision = await self.trader.integrate_debate_and_decide(
             analysis_state, debate_result
@@ -11228,7 +11241,7 @@ class OptimizedTradingAgentsSystem:
         print(f"🐛 DEBUG: 交易员决策完成，strategy_type={trading_decision.strategy_type}")
         
         # 第三阶段：专业风控评估
-        print("🐛 DEBUG: 开始第三阶段：风控部门专业评估")
+        debug_print("🐛 DEBUG: 开始第三阶段：风控部门专业评估")
         self.logger.info("第三阶段：风控部门专业评估")
         risk_assessment = await self.risk_management.conduct_risk_assessment(
             analysis_state, debate_result, trading_decision
@@ -11236,7 +11249,7 @@ class OptimizedTradingAgentsSystem:
         print(f"🐛 DEBUG: 风控评估完成，risk_level={risk_assessment.overall_risk_level}")
 
         # 第四阶段：CIO最终决策
-        print("🐛 DEBUG: 开始第四阶段：CIO权威决策")
+        debug_print("🐛 DEBUG: 开始第四阶段：CIO权威决策")
         self.logger.info("第四阶段：CIO权威决策")
         executive_decision = await self.decision_maker.make_executive_decision(
             analysis_state, debate_result, risk_assessment, trading_decision
@@ -11245,7 +11258,7 @@ class OptimizedTradingAgentsSystem:
         print(f"🐛 DEBUG: confidence_level={executive_decision.confidence_level} (type: {type(executive_decision.confidence_level)})")
         
         # 整合最终结果
-        print("🐛 DEBUG: 开始整合最终结果")
+        debug_print("🐛 DEBUG: 开始整合最终结果")
         
         # 数据类型检查已完成，移除调试信息
         

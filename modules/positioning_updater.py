@@ -49,7 +49,6 @@ class PositioningDataUpdater:
             "start_time": None,
             "end_time": None,
             "target_date": None,
-            "lookback_days": 0,
             "updated_varieties": [],
             "failed_varieties": [],
             "skipped_varieties": [],
@@ -723,13 +722,12 @@ class PositioningDataUpdater:
             self.update_stats["error_messages"].append(f"{symbol}: 保存失败 - {str(e)}")
             return False
     
-    def update_to_date(self, target_date_str: str, lookback_days: int = 5, specific_varieties: Optional[List[str]] = None) -> Dict:
+    def update_to_date(self, target_date_str: str, specific_varieties: Optional[List[str]] = None) -> Dict:
         """
-        更新数据到指定日期
+        更新数据到指定日期（智能增量更新）
         
         Args:
             target_date_str: 目标日期 (YYYY-MM-DD格式)
-            lookback_days: 回望天数
             specific_varieties: 指定品种列表，None表示全部品种
         
         Returns:
@@ -749,16 +747,39 @@ class PositioningDataUpdater:
         
         self.update_stats["start_time"] = datetime.now()
         self.update_stats["target_date"] = target_date_str
-        self.update_stats["lookback_days"] = lookback_days
         
-        # 计算日期范围
-        start_date = target_date - timedelta(days=lookback_days)
+        # 获取现有数据状态，智能确定起始日期
+        existing_varieties, variety_info = self.get_existing_data_status()
+        
+        # 智能确定起始日期
+        if variety_info:
+            # 找到所有品种中最新的数据日期
+            latest_dates = []
+            for v, v_info in variety_info.items():
+                if v_info.get('latest_date'):
+                    latest_dates.append(v_info['latest_date'])
+            
+            if latest_dates:
+                overall_latest = max(latest_dates)
+                # 从最新日期的下一天开始更新
+                start_date = overall_latest + timedelta(days=1)
+                print(f"📅 检测到最新数据日期: {overall_latest.strftime('%Y-%m-%d')}")
+                print(f"📅 将从 {start_date.strftime('%Y-%m-%d')} 更新到 {target_date.strftime('%Y-%m-%d')}")
+                
+                # 如果已经是最新，则获取最近3天的数据（用于确保数据完整性）
+                if start_date >= target_date:
+                    print(f"📅 数据已是最新，获取最近3天数据以确保完整性")
+                    start_date = target_date - timedelta(days=3)
+            else:
+                # 没有日期信息，获取最近7天数据
+                start_date = target_date - timedelta(days=7)
+                print(f"📅 首次更新，将获取最近7天数据")
+        else:
+            # 没有现有数据，获取最近7天数据
+            start_date = target_date - timedelta(days=7)
+            print(f"📅 首次更新，将获取最近7天数据")
         
         print(f"📅 更新日期范围: {start_date.strftime('%Y-%m-%d')} ~ {target_date.strftime('%Y-%m-%d')}")
-        print(f"📊 回望天数: {lookback_days}")
-        
-        # 获取现有数据状态
-        existing_varieties, variety_info = self.get_existing_data_status()
         
         # 确定要更新的品种
         if specific_varieties:
@@ -852,19 +873,80 @@ class PositioningDataUpdater:
         return self.update_to_date(target_date_str, specific_varieties)
 
 def main():
-    """测试主函数"""
+    """交互式主函数"""
+    print("=" * 80)
+    print("🎯 持仓席位数据更新器")
+    print("=" * 80)
+    
     updater = PositioningDataUpdater()
     
     # 获取现有数据状态
+    print("\n🔍 正在检查现有数据状态...")
     varieties, info = updater.get_existing_data_status()
     
-    # 模拟更新前3个品种到今天
-    target_date = datetime.now().strftime('%Y-%m-%d')
-    test_varieties = ['RB', 'CU', 'AL'] if varieties else None
+    print(f"\n📦 已有品种数量: {len(varieties)} 个")
+    if varieties:
+        print(f"   品种列表: {', '.join(sorted(varieties)[:20])}{'...' if len(varieties) > 20 else ''}")
+        
+        # 显示最新日期
+        if info:
+            latest_dates = []
+            for v, v_info in info.items():
+                if v_info.get('latest_date'):
+                    latest_dates.append(v_info['latest_date'])
+            if latest_dates:
+                overall_latest = max(latest_dates)
+                print(f"📅 当前最新数据日期: {overall_latest.strftime('%Y-%m-%d')}")
+    else:
+        print("📅 当前暂无数据")
     
-    result = updater.update_to_date(target_date, lookback_days=3, specific_varieties=test_varieties)
+    # 用户输入更新参数
+    print("\n" + "=" * 80)
+    print("请输入更新参数:")
+    print("-" * 80)
     
-    print(f"\n🎯 更新结果: {result}")
+    # 输入目标日期
+    default_date = datetime.now().strftime('%Y-%m-%d')
+    target_date_input = input(f"📅 目标日期 (格式: YYYY-MM-DD, 直接回车使用今天 {default_date}): ").strip()
+    target_date = target_date_input if target_date_input else default_date
+    
+    # 验证日期格式
+    try:
+        datetime.strptime(target_date, '%Y-%m-%d')
+    except ValueError:
+        print(f"❌ 日期格式错误，使用默认日期: {default_date}")
+        target_date = default_date
+    
+    # 输入品种
+    varieties_input = input(f"🎯 要更新的品种 (输入品种代码用逗号分隔，如 RB,CU,AL；直接回车更新全部): ").strip()
+    
+    if varieties_input:
+        specific_varieties = [v.strip().upper() for v in varieties_input.split(',')]
+        print(f"\n✅ 将更新指定品种: {', '.join(specific_varieties)}")
+    else:
+        specific_varieties = None
+        print(f"\n✅ 将更新所有品种")
+    
+    # 确认
+    print("\n" + "=" * 80)
+    print(f"📋 更新配置:")
+    print(f"   目标日期: {target_date}")
+    print(f"   更新品种: {'全部' if not specific_varieties else ', '.join(specific_varieties)}")
+    print(f"   更新模式: 智能增量更新（自动从最新数据补全到目标日期）")
+    print("=" * 80)
+    
+    confirm = input("\n确认开始更新？(y/N): ").strip().lower()
+    if confirm != 'y':
+        print("❌ 已取消更新")
+        return
+    
+    # 执行更新
+    print("\n🚀 开始更新...")
+    result = updater.update_to_date(target_date, specific_varieties=specific_varieties)
+    
+    print(f"\n" + "=" * 80)
+    print("🎯 更新完成!")
+    print("=" * 80)
 
 if __name__ == "__main__":
     main()

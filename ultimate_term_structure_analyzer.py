@@ -38,7 +38,7 @@ class UltimateTermStructureAnalyzer:
     """终极期限结构分析器 - 完整专业版本"""
     
     def __init__(self, deepseek_api_key: str = "sk-293dec7fabb54606b4f8d4f606da3383", 
-                 serper_api_key: str = "d3654e36956e0bf331e901886c49c602cea72eb1", 
+                 serper_api_key: str = "04555ec0f2ce150d1cb628c7a80e2e433e193535", 
                  data_dir: str = r"D:\Cursor\cursor项目\TradingAgent\qihuo\database"):
         self.deepseek_api_key = deepseek_api_key
         self.serper_api_key = serper_api_key

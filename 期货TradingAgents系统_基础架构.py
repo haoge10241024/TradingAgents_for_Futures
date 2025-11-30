@@ -561,8 +561,8 @@ class FuturesAnalysisIntegrator:
             # 导入适配器
             from streamlit_improved_news_adapter import analyze_improved_news_for_streamlit
             
-            # 获取API密钥
-            api_key = config.get("api_settings", {}).get("deepseek", {}).get("api_key", "YOUR_API_KEY")
+            # 获取API密钥（使用self.config而不是config）
+            api_key = self.config.get("api_settings", {}).get("deepseek", {}).get("api_key", "YOUR_API_KEY")
             
             # 调用分析
             result_data = analyze_improved_news_for_streamlit(commodity, api_key, analysis_date)
@@ -692,29 +692,35 @@ class FuturesAnalysisIntegrator:
             from 优化版辩论风控决策系统 import OptimizedTradingAgentsSystem
             from 期货TradingAgents系统_工具模块 import DeepSeekAPIClient
 
-            # 创建默认配置
-            default_config = {
-                "deepseek_api_key": "YOUR_DEEPSEEK_API_KEY_HERE",  # 请配置你的API密钥
-                "api_settings": {
-                    "deepseek": {
-                        "api_key": "YOUR_DEEPSEEK_API_KEY_HERE",  # 请配置你的API密钥
-                        "base_url": "https://api.deepseek.com/v1",
-                        "timeout": 120
-                    },
-                    "serper": {
-                        "api_key": "d3654e36956e0bf331e901886c49c602cea72eb1",
-                        "base_url": "https://google.serper.dev/search"
-                    }
-                },
-                "logging": {
+            # 使用用户配置而非硬编码的默认值
+            user_config = self.config.copy() if self.config else {}
+            
+            # 确保必要的配置存在，但优先使用用户配置
+            if "api_settings" not in user_config:
+                user_config["api_settings"] = {}
+            if "deepseek" not in user_config["api_settings"]:
+                user_config["api_settings"]["deepseek"] = {}
+            if "serper" not in user_config["api_settings"]:
+                user_config["api_settings"]["serper"] = {}
+            
+            # 设置默认值（仅在用户未配置时）
+            user_config["api_settings"]["deepseek"].setdefault("base_url", "https://api.deepseek.com/v1")
+            user_config["api_settings"]["deepseek"].setdefault("timeout", 120)
+            user_config["api_settings"]["serper"].setdefault("base_url", "https://google.serper.dev/search")
+            
+            # 兼容旧版配置：如果有单独的deepseek_api_key，也使用它
+            if "deepseek_api_key" not in user_config and user_config["api_settings"]["deepseek"].get("api_key"):
+                user_config["deepseek_api_key"] = user_config["api_settings"]["deepseek"]["api_key"]
+            
+            if "logging" not in user_config:
+                user_config["logging"] = {
                     "level": "INFO",
                     "console_logging": True,
                     "file_logging": False
                 }
-            }
 
-            # 创建优化版系统实例（使用我修改过的prompt）
-            system = OptimizedTradingAgentsSystem(default_config)
+            # 创建优化版系统实例（使用用户配置）
+            system = OptimizedTradingAgentsSystem(user_config)
 
             # 执行完整分析
             result = await system.run_complete_analysis(analysis_state, debate_rounds)

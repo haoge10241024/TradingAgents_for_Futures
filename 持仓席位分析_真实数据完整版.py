@@ -51,6 +51,26 @@ class RealDataPositioningSystem:
         self.positioning_path = os.path.join(data_root, "positioning")
         self.technical_path = os.path.join(data_root, "technical_analysis")
     
+    def _fix_column_names(self, df: pd.DataFrame) -> pd.DataFrame:
+        """修复CSV列名，去除空格等问题"""
+        # 去除列名前后空格
+        df.columns = df.columns.str.strip()
+        
+        # 检测并转换持仓量等数值列
+        # 尝试多种可能的列名
+        member_col = None
+        pos_col = None
+        
+        for col in df.columns:
+            if '会员' in col or '席位' in col or 'member' in col.lower():
+                member_col = col
+            if '持仓量' in col or 'position' in col.lower() or '成交量' in col or 'volume' in col.lower():
+                pos_col = col
+                # 将该列转换为float类型
+                df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0).astype(float)
+        
+        return df
+    
     def load_positioning_data(self, symbol: str) -> Dict:
         """加载真实的持仓席位数据"""
         symbol_path = os.path.join(self.positioning_path, symbol)
@@ -65,15 +85,18 @@ class RealDataPositioningSystem:
         
         # 读取多头持仓排名
         long_file = os.path.join(symbol_path, "long_position_ranking.csv")
-        long_df = pd.read_csv(long_file)
+        long_df = pd.read_csv(long_file, encoding='utf-8')
+        long_df = self._fix_column_names(long_df)
         
         # 读取空头持仓排名
         short_file = os.path.join(symbol_path, "short_position_ranking.csv")
-        short_df = pd.read_csv(short_file)
+        short_df = pd.read_csv(short_file, encoding='utf-8')
+        short_df = self._fix_column_names(short_df)
         
         # 读取成交量排名
         volume_file = os.path.join(symbol_path, "volume_ranking.csv")
-        volume_df = pd.read_csv(volume_file)
+        volume_df = pd.read_csv(volume_file, encoding='utf-8')
+        volume_df = self._fix_column_names(volume_df)
         
         return {
             'summary': summary,

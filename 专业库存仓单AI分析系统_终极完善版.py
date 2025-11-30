@@ -55,7 +55,7 @@ class UltimatePerfectedInventoryAnalyzer:
         """初始化系统"""
         # API配置
         self.deepseek_api_key = "sk-293dec7fabb54606b4f8d4f606da3383"
-        self.serper_api_key = "d3654e36956e0bf331e901886c49c602cea72eb1"
+        self.serper_api_key = "04555ec0f2ce150d1cb628c7a80e2e433e193535"
         
         # 数据路径配置
         self.base_path = Path(r"D:\Cursor\cursor项目\TradingAgent\qihuo\database")

@@ -69,6 +69,8 @@ qihuo/trading_agents_results/
 !qihuo/database/technical_analysis/**/*.csv
 !qihuo/database/term_structure/**/*.csv
 !qihuo/database/receipt/**/*.csv
+!qihuo/database/basis/**/*.csv
+!qihuo/database/positioning/**/*.csv
 
 # 临时文件
 temp/

@@ -18,13 +18,14 @@ try:
     from enhanced_professional_technical_analysis import EnhancedProfessionalTechnicalAnalyzer
     print("✅ 增强版技术分析系统加载成功")
 except Exception as e:
-    print(f"❌ 加载增强版技术分析系统失败: {e}")
+    error_msg = str(e)  # 保存错误信息到外部作用域
+    print(f"❌ 加载增强版技术分析系统失败: {error_msg}")
     # 提供一个假的类以避免后续错误
     class EnhancedProfessionalTechnicalAnalyzer:
         def __init__(self):
             pass
         def analyze_symbol_enhanced(self, symbol: str, include_market_info: bool = True, display_result: bool = False) -> Dict:
-            return {"error": f"技术分析系统加载失败: {e}", "success": False}
+            return {"error": f"技术分析系统加载失败: {error_msg}", "success": False}
 
 
 async def analyze_technical_for_streamlit(variety: str, analysis_date: str = None, include_market_info: bool = True) -> Dict[str, Any]:

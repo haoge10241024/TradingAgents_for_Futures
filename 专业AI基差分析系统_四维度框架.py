@@ -34,7 +34,7 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 # API配置
 DEEPSEEK_API_KEY = "sk-293dec7fabb54606b4f8d4f606da3383"
 DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1/chat/completions"
-SERPER_API_KEY = "d3654e36956e0bf331e901886c49c602cea72eb1"
+SERPER_API_KEY = "04555ec0f2ce150d1cb628c7a80e2e433e193535"
 SERPER_BASE_URL = "https://google.serper.dev/search"
 
 # 品种中文名称映射（扩展版 - 支持更多品种）

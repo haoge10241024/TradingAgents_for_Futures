@@ -442,7 +442,7 @@ class StreamlitDataManager:
                 "path": self.database_root / "positioning", 
                 "data_file": "long_position_ranking.csv",
                 "date_column": "date",
-                "date_format": "%Y%m%d",
+                "date_format": "%Y-%m-%d",  # CSV文件中的日期格式是YYYY-MM-DD
                 "update_script": "unified_futures_data_updater.py",
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
@@ -948,14 +948,13 @@ class StreamlitAnalysisManager:
                             return commodity in df.get('variety', []).values if not df.empty else False
                 
                 elif module_key == "positioning":
-                    # 检查持仓数据
-                    pos_path = data_manager.modules_config.get("持仓分析系统", {}).get("path")
+                    # 检查持仓数据（按品种分文件夹）
+                    pos_path = data_manager.modules_config.get("positioning", {}).get("path")
                     if pos_path and pos_path.exists():
-                        data_file = pos_path / "positioning_data.csv"
-                        if data_file.exists():
-                            import pandas as pd
-                            df = pd.read_csv(data_file)
-                            return commodity in df.get('variety', []).values if not df.empty else False
+                        commodity_path = pos_path / commodity
+                        # 检查品种文件夹是否存在且有CSV文件
+                        if commodity_path.exists():
+                            return any(commodity_path.glob("*.csv"))
                 
                 elif module_key == "term_structure":
                     # 检查期限结构数据

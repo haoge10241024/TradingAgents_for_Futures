@@ -34,35 +34,17 @@ try:
 except:
     DataEnhancedAnalyzer = None
 
-# 最后降级选项：改进版
+# 最后降级选项：改进版（暂时禁用，文件不存在）
 ImprovedAnalyzer = None
-try:
-    # 动态加载改进版系统
-    import pandas as pd
-    import numpy as np
-    import requests
-    import json
-    from pathlib import Path
-    from datetime import datetime, timedelta
-    import plotly.graph_objects as go
-    import plotly.express as px
-    from plotly.subplots import make_subplots
-    import plotly.offline as pyo
-    from scipy import stats
-    import warnings
-    import time
-    import os
-    from typing import Dict, List, Any, Optional, Tuple
-    from dataclasses import dataclass
-    from io import BytesIO
-    import base64
-    
-    exec(open('改进版库存仓单分析系统.py', encoding='utf-8').read(), globals())
-    ImprovedAnalyzer = ImprovedInventoryAnalysisSystem
-    print("✅ 改进版系统可用作最终备用")
-except Exception as e:
-    print(f"⚠️ 改进版系统加载失败: {e}")
-    ImprovedAnalyzer = None
+# try:
+#     # 动态加载改进版系统
+#     exec(open('改进版库存仓单分析系统.py', encoding='utf-8').read(), globals())
+#     ImprovedAnalyzer = ImprovedInventoryAnalysisSystem
+#     print("✅ 改进版系统可用作最终备用")
+# except Exception as e:
+#     print(f"⚠️ 改进版系统加载失败: {e}")
+#     ImprovedAnalyzer = None
+print("ℹ️ 改进版系统已禁用（文件不存在），使用终极完善版或数据增强版")
 
 
 async def analyze_inventory_for_streamlit(variety: str, analysis_date: str = None, use_reasoner: bool = True) -> Dict[str, Any]:

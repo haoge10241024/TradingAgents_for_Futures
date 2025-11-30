@@ -13,6 +13,7 @@ import time
 import random
 import json
 import warnings
+import re
 from typing import Dict, List, Optional, Tuple
 
 warnings.filterwarnings('ignore')
@@ -32,6 +33,7 @@ class TermStructureUpdater:
         
         # 交易所配置
         self.exchanges = [
+            {"market": "DCE", "name": "大商所"},
             {"market": "CZCE", "name": "郑商所"},
             {"market": "SHFE", "name": "上期所"},
             {"market": "INE", "name": "上海国际能源交易中心"},
@@ -160,8 +162,31 @@ class TermStructureUpdater:
         
         try:
             if exchange['market'] == 'DCE':
-                # 大商所使用不同的接口
-                df = ak.futures_zh_daily_sina(symbol="all", start_date=start_date, end_date=end_date)
+                # 大商所需要按品种获取（futures_main_sina支持日期参数）
+                dce_varieties = ['A', 'B', 'C', 'CS', 'I', 'J', 'JD', 'JM', 'L', 'LH', 'M', 'P', 'PG', 'PP', 'V', 'Y', 'EB', 'EG', 'RR']
+                all_dce_data = []
+                
+                for variety in dce_varieties:
+                    try:
+                        variety_df = ak.futures_main_sina(
+                            symbol=f"{variety}0",  # 主力合约，如A0
+                            start_date=start_date,
+                            end_date=end_date
+                        )
+                        if variety_df is not None and not variety_df.empty:
+                            # 添加品种代码列（如果没有的话）
+                            if 'symbol' not in variety_df.columns:
+                                variety_df['symbol'] = f"{variety}0"
+                            all_dce_data.append(variety_df)
+                    except Exception as e:
+                        # 单个品种失败不影响其他品种
+                        pass
+                
+                if all_dce_data:
+                    df = pd.concat(all_dce_data, ignore_index=True)
+                else:
+                    print(f"    ❌ {exchange['name']}: 所有品种均获取失败")
+                    return None
             else:
                 # 其他交易所使用通用接口
                 df = ak.get_futures_daily(start_date=start_date, end_date=end_date, market=exchange['market'])
@@ -212,20 +237,56 @@ class TermStructureUpdater:
                 print(f"    ❌ {exchange['name']}: 缺少必要列，跳过处理")
                 return variety_data
             
-            # 处理日期
-            df['date'] = pd.to_datetime(df['date']).dt.strftime('%Y%m%d')
+            # 🔧 修复：正确处理日期（避免int64被当作纳秒时间戳）
+            # 关键：统一转换为datetime类型
+            if df['date'].dtype in ['int64', 'float64', 'int32']:
+                # 整数类型（如20251114）：先转字符串，再指定格式解析
+                df['date'] = pd.to_datetime(df['date'].astype(str), format='%Y%m%d', errors='coerce')
+            elif df['date'].dtype == 'object':
+                # 对象类型：可能是字符串、datetime.date等
+                # 尝试智能解析（pandas会自动识别格式）
+                df['date'] = pd.to_datetime(df['date'], errors='coerce')
+            else:
+                # 其他类型（如datetime64）：直接转换
+                df['date'] = pd.to_datetime(df['date'], errors='coerce')
+            
+            # 过滤无效日期（NaT或早于2000年的异常数据）
+            df = df[df['date'].notna()]
+            df = df[df['date'] >= '2000-01-01']
+            
+            # 转换为YYYYMMDD格式
+            df['date'] = df['date'].dt.strftime('%Y%m%d')
             
             # 按品种分组
             for symbol, group in df.groupby('symbol'):
                 try:
                     # 提取品种代码（去除合约月份）
-                    if len(symbol) >= 4:
-                        variety = symbol[:-4].upper()  # 移除最后4位数字
-                    else:
+                    # 正确方法：找到第一个数字的位置，之前的部分就是品种代码
+                    match = re.match(r'([A-Za-z]+)(\d+)', str(symbol))
+                    if not match:
                         continue
+                    variety = match.group(1).upper()  # 提取字母部分作为品种代码
+                    month_code = match.group(2)  # 提取月份代码
+                    
+                    # 标准化合约代码：郑商所3位月份补齐为4位
+                    # 如FG511 → FG2511, AP603 → AP2603
+                    # 特殊处理：主力合约标识"0"保持不变
+                    if month_code == '0':
+                        pass  # 主力合约，保持"0"不变
+                    elif len(month_code) == 3:
+                        month_code = '2' + month_code  # 在第一位前加2补齐为4位
+                    elif len(month_code) == 4:
+                        pass  # 已经是4位，不需要处理
+                    else:
+                        continue  # 非3位或4位的异常格式，跳过
+                    
+                    # 生成标准化的合约代码
+                    standardized_symbol = variety + month_code
                     
                     # 整理数据
                     processed_group = group[['date', 'symbol', 'close', 'volume', 'open_interest']].copy()
+                    # 使用标准化的合约代码
+                    processed_group['symbol'] = standardized_symbol
                     processed_group['close'] = pd.to_numeric(processed_group['close'], errors='coerce')
                     processed_group['volume'] = pd.to_numeric(processed_group['volume'], errors='coerce')
                     processed_group['open_interest'] = pd.to_numeric(processed_group['open_interest'], errors='coerce')
@@ -256,86 +317,142 @@ class TermStructureUpdater:
             variety_df: 品种数据
         
         Returns:
-            带期限结构指标的数据
+            添加了指标的数据
         """
         try:
-            # 按日期分组，计算展期收益率
-            result_data = []
+            # 按日期分组计算指标
+            variety_df = variety_df.sort_values(['date', 'symbol'])
+            variety_df['roll_yield'] = 0.0
             
-            for date, group in variety_df.groupby('date'):
+            for date, date_group in variety_df.groupby('date'):
                 # 按合约月份排序
-                group = group.sort_values('symbol')
+                sorted_contracts = date_group.sort_values('symbol')
                 
-                for i, (_, row) in enumerate(group.iterrows()):
-                    # 计算展期收益率（相对于下一个合约）
-                    roll_yield = 0.0
-                    if i < len(group) - 1:
-                        next_row = group.iloc[i + 1]
-                        roll_yield = self.calculate_roll_yield(
-                            row['symbol'], next_row['symbol'],
-                            row['close'], next_row['close']
-                        )
+                # 计算展期收益率
+                for i in range(len(sorted_contracts) - 1):
+                    current_idx = sorted_contracts.index[i]
+                    next_idx = sorted_contracts.index[i + 1]
                     
-                    result_data.append({
-                        'date': date,
-                        'symbol': row['symbol'],
-                        'close': row['close'],
-                        'volume': row.get('volume', 0),
-                        'open_interest': row.get('open_interest', 0),
-                        'roll_yield': roll_yield
-                    })
+                    current_contract = sorted_contracts.loc[current_idx, 'symbol']
+                    next_contract = sorted_contracts.loc[next_idx, 'symbol']
+                    current_price = sorted_contracts.loc[current_idx, 'close']
+                    next_price = sorted_contracts.loc[next_idx, 'close']
+                    
+                    roll_yield = self.calculate_roll_yield(
+                        current_contract, next_contract,
+                        current_price, next_price
+                    )
+                    
+                    variety_df.loc[current_idx, 'roll_yield'] = roll_yield
             
-            return pd.DataFrame(result_data)
+            return variety_df
             
         except Exception as e:
-            print(f"      ❌ 期限结构指标计算失败: {str(e)[:50]}")
+            print(f"      ⚠️ 计算指标时出错: {str(e)[:50]}")
+            if 'roll_yield' not in variety_df.columns:
+                variety_df['roll_yield'] = 0.0
             return variety_df
     
-    def save_variety_data(self, variety: str, new_data: pd.DataFrame, existing_info: Optional[Dict] = None) -> bool:
+    def save_variety_data(self, variety: str, new_data: pd.DataFrame, existing_info: Optional[Dict] = None, target_date: datetime = None) -> bool:
         """
-        保存品种数据（增量更新）
+        保存品种数据（智能增量更新）
         
         Args:
             variety: 品种代码
             new_data: 新数据
             existing_info: 现有数据信息
+            target_date: 目标日期
         
         Returns:
-            是否保存成功
+            是否成功保存
         """
         try:
+            # 🔒 验证品种代码：过滤无效的单字母品种
+            if len(variety) == 1:
+                print(f"    ⚠️ {variety}: 单字母品种代码无效，跳过（可能是错误提取）")
+                self.update_stats["skipped_varieties"].append(variety)
+                return True
+            
+            # 🔒 验证数据：过滤1970年的异常数据
+            new_data['date_dt'] = pd.to_datetime(new_data['date'], format='%Y%m%d', errors='coerce')
+            new_data = new_data[new_data['date_dt'].notna()]  # 过滤解析失败的日期
+            new_data = new_data[new_data['date_dt'] >= '2000-01-01']  # 过滤2000年之前的数据
+            
+            if len(new_data) == 0:
+                print(f"    ⚠️ {variety}: 过滤后无有效数据（可能全是1970异常数据）")
+                self.update_stats["skipped_varieties"].append(variety)
+                return True
+            
             variety_dir = self.base_dir / variety
             variety_dir.mkdir(parents=True, exist_ok=True)
-            
             ts_file = variety_dir / "term_structure.csv"
             
+            # 如果有现有数据，智能判断需要保存的部分
             if existing_info and ts_file.exists():
-                # 读取现有数据
                 existing_df = pd.read_csv(ts_file)
                 
-                # 合并数据
-                combined_df = pd.concat([existing_df, new_data], ignore_index=True)
-                combined_df = combined_df.drop_duplicates(subset=['date', 'symbol']).sort_values(['date', 'symbol']).reset_index(drop=True)
+                # 🔒 清理现有数据中的1970异常数据
+                existing_df['date_dt'] = pd.to_datetime(existing_df['date'], format='%Y%m%d', errors='coerce')
+                existing_df = existing_df[existing_df['date_dt'].notna()]
+                existing_df = existing_df[existing_df['date_dt'] >= '2000-01-01']
+                existing_df = existing_df.drop(columns=['date_dt'])
                 
-                new_records = len(combined_df) - len(existing_df)
-                if new_records > 0:
-                    print(f"    ✅ {variety}: 新增 {new_records} 条记录")
-                    self.update_stats["updated_varieties"].append(variety)
-                    self.update_stats["total_new_records"] += new_records
+                if len(existing_df) == 0:
+                    # 如果现有数据清理后为空，视为新品种
+                    print(f"    ⚠️ {variety}: 现有数据全是异常数据，已清理")
+                    existing_info = None
+                
+                latest_date = existing_info['latest_date'] if existing_info else None
+                
+                # 🎯 智能过滤：只保留比现有最新日期更新的数据
+                if latest_date:
+                    filtered_new_data = new_data[new_data['date_dt'] > latest_date].copy()
                 else:
-                    print(f"    ℹ️ {variety}: 无新数据")
+                    filtered_new_data = new_data.copy()
+                filtered_new_data = filtered_new_data.drop(columns=['date_dt'])
+                
+                if len(filtered_new_data) > 0:
+                    # 合并新旧数据
+                    combined_df = pd.concat([existing_df, filtered_new_data], ignore_index=True)
+                    
+                    # 去重（保留最新的）
+                    combined_df = combined_df.drop_duplicates(subset=['date', 'symbol'], keep='last')
+                    combined_df = combined_df.sort_values(['date', 'symbol'])
+                    
+                    # 计算实际新增
+                    new_record_count = len(combined_df) - len(existing_df)
+                    
+                    if new_record_count > 0:
+                        # 计算日期范围
+                        filtered_new_data['date_dt'] = pd.to_datetime(filtered_new_data['date'], format='%Y%m%d')
+                        new_min = filtered_new_data['date_dt'].min().strftime('%Y-%m-%d')
+                        new_max = filtered_new_data['date_dt'].max().strftime('%Y-%m-%d')
+                        
+                        print(f"    ✅ {variety}: 新增 {new_record_count} 条 ({new_min} ~ {new_max})")
+                        self.update_stats["updated_varieties"].append(variety)
+                        self.update_stats["total_new_records"] += new_record_count
+                        
+                        # 保存数据
+                        combined_df.to_csv(ts_file, index=False, encoding='utf-8-sig')
+                        return True
+                    else:
+                        print(f"    ℹ️ {variety}: 去重后无新数据")
+                        self.update_stats["skipped_varieties"].append(variety)
+                        return True
+                else:
+                    print(f"    ℹ️ {variety}: 已是最新 (现有: {latest_date.strftime('%Y-%m-%d')})")
                     self.update_stats["skipped_varieties"].append(variety)
                     return True
             else:
                 # 新品种或无现有数据
-                combined_df = new_data
-                print(f"    ✅ {variety}: 创建 {len(new_data)} 条记录")
+                combined_df = new_data.drop(columns=['date_dt'])
+                print(f"    ✅ {variety}: 创建 {len(combined_df)} 条记录 (新品种)")
                 self.update_stats["new_varieties"].append(variety)
-                self.update_stats["total_new_records"] += len(new_data)
-            
-            # 保存数据
-            combined_df.to_csv(ts_file, index=False, encoding='utf-8')
-            return True
+                self.update_stats["total_new_records"] += len(combined_df)
+                
+                # 保存数据
+                combined_df.to_csv(ts_file, index=False, encoding='utf-8-sig')
+                return True
             
         except Exception as e:
             print(f"    ❌ {variety}: 保存失败 - {str(e)}")
@@ -343,13 +460,13 @@ class TermStructureUpdater:
             self.update_stats["error_messages"].append(f"{variety}: 保存失败 - {str(e)}")
             return False
     
-    def update_to_date(self, target_date_str: str, update_days: int = 5, specific_varieties: Optional[List[str]] = None) -> Dict:
+    def update_to_date(self, target_date_str: str, update_days: Optional[int] = None, specific_varieties: Optional[List[str]] = None) -> Dict:
         """
-        更新数据到指定日期
+        更新数据到指定日期（支持智能增量更新）
         
         Args:
             target_date_str: 目标日期 (YYYY-MM-DD格式)
-            update_days: 更新天数
+            update_days: 更新天数（可选，如果不指定则自动计算）
             specific_varieties: 指定品种列表，None表示全部品种
         
         Returns:
@@ -369,6 +486,30 @@ class TermStructureUpdater:
         
         self.update_stats["start_time"] = datetime.now()
         self.update_stats["target_date"] = target_date_str
+        
+        # 获取现有数据状态
+        existing_varieties, variety_info = self.get_existing_data_status()
+        
+        # 智能计算更新天数
+        if update_days is None:
+            latest_dates = [info['latest_date'] for info in variety_info.values() if info.get('latest_date')]
+            if latest_dates:
+                overall_latest = max(latest_dates)
+                calculated_days = (target_date.date() - overall_latest.date()).days
+                
+                # 🔧 修复：增加最小回溯天数，确保覆盖所有品种
+                # 原因：不同品种可能更新进度不同，需要足够长的时间窗口
+                min_lookback = 90  # 至少回溯90天
+                update_days = max(calculated_days, min_lookback)
+                
+                print(f"📊 智能更新: 从 {overall_latest.strftime('%Y-%m-%d')} 更新到 {target_date_str}")
+                print(f"   回溯天数: {update_days} 天 (最新品种需{calculated_days}天，保证覆盖所有品种需{min_lookback}天)")
+            else:
+                print(f"📊 首次更新: 获取最近90天数据")
+                update_days = 90
+        else:
+            print(f"📊 指定天数: 更新最近 {update_days} 天")
+        
         self.update_stats["update_days"] = update_days
         
         # 计算日期范围
@@ -377,10 +518,6 @@ class TermStructureUpdater:
         end_date_str = target_date.strftime('%Y%m%d')
         
         print(f"📅 更新日期范围: {start_date_str} - {end_date_str}")
-        print(f"📊 计划更新天数: {update_days}")
-        
-        # 获取现有数据状态
-        existing_varieties, variety_info = self.get_existing_data_status()
         
         # 按交易所获取数据
         all_variety_data = {}
@@ -434,15 +571,17 @@ class TermStructureUpdater:
                 
                 # 保存数据
                 existing_info = variety_info.get(variety)
-                if self.save_variety_data(variety, variety_df, existing_info):
+                if self.save_variety_data(variety, variety_df, existing_info, target_date):
                     processed_count += 1
                     
             except Exception as e:
-                print(f"    ❌ {variety}: 处理失败 - {str(e)[:50]}")
+                print(f"    ❌ {variety}: 处理失败 - {str(e)}")
                 self.update_stats["failed_varieties"].append(variety)
+                self.update_stats["error_messages"].append(f"{variety}: 处理失败 - {str(e)}")
         
-        # 完成统计
+        # 生成统计报告
         self.update_stats["end_time"] = datetime.now()
+        elapsed_time = (self.update_stats["end_time"] - self.update_stats["start_time"]).total_seconds()
         
         print(f"\n📊 更新完成统计:")
         print(f"  ✅ 成功更新品种: {len(self.update_stats['updated_varieties'])} 个")
@@ -450,44 +589,66 @@ class TermStructureUpdater:
         print(f"  ❌ 失败品种: {len(self.update_stats['failed_varieties'])} 个")
         print(f"  ⏭️ 跳过品种: {len(self.update_stats['skipped_varieties'])} 个")
         print(f"  📈 新增记录总数: {self.update_stats['total_new_records']} 条")
-        print(f"  ⏱️ 耗时: {(self.update_stats['end_time'] - self.update_stats['start_time']).total_seconds():.1f} 秒")
+        print(f"  ⏱️ 耗时: {elapsed_time:.1f} 秒")
         
-        # 交易所统计
-        print(f"\n📋 交易所数据获取统计:")
-        for exchange_name, stats in self.update_stats["exchange_stats"].items():
-            status_icon = "✅" if stats["status"] == "success" else "❌"
-            print(f"  {status_icon} {exchange_name}: {stats['varieties']} 个品种")
+        if self.update_stats["exchange_stats"]:
+            print(f"\n📋 交易所数据获取统计:")
+            for exchange_name, stats in self.update_stats["exchange_stats"].items():
+                status_icon = "✅" if stats["status"] == "success" else "❌"
+                print(f"  {status_icon} {exchange_name}: {stats['varieties']} 个品种")
         
-        if self.update_stats["failed_varieties"]:
-            print(f"  ⚠️ 失败品种列表: {', '.join(self.update_stats['failed_varieties'])}")
+        if self.update_stats["error_messages"]:
+            print(f"\n⚠️ 错误信息:")
+            for msg in self.update_stats["error_messages"][:10]:
+                print(f"  • {msg}")
         
         return self.update_stats
-    
-    def update_data(self, target_date_str: str, specific_varieties: Optional[List[str]] = None) -> Dict:
-        """
-        更新数据到指定日期（与update_to_date相同，为兼容统一更新器接口）
-        
-        Args:
-            target_date_str: 目标日期 (YYYY-MM-DD格式)
-            specific_varieties: 指定品种列表，None表示全部品种
-        
-        Returns:
-            更新结果统计
-        """
-        return self.update_to_date(target_date_str, specific_varieties)
 
 def main():
-    """测试主函数"""
-    updater = TermStructureUpdater()
+    """主函数"""
+    import sys
     
-    # 获取现有数据状态
-    varieties, info = updater.get_existing_data_status()
+    print("\n" + "=" * 80)
+    print("🎯 期限结构数据更新器".center(76))
+    print("=" * 80)
+    print("\n📌 更新模式: 智能增量更新（自动从最新数据补全到目标日期）")
+    print("\n请输入更新参数:\n")
+    print("-" * 80)
     
-    # 模拟更新到今天
-    target_date = datetime.now().strftime('%Y-%m-%d')
-    result = updater.update_to_date(target_date, update_days=3)
+    # 获取目标日期
+    target_date = input(f"📅 目标日期 (格式: YYYY-MM-DD, 直接回车使用今天 {datetime.now().strftime('%Y-%m-%d')}): ").strip()
+    if not target_date:
+        target_date = datetime.now().strftime('%Y-%m-%d')
     
-    print(f"\n🎯 更新结果: {result}")
+    # 获取品种列表
+    varieties_input = input("🎯 要更新的品种 (输入品种代码用逗号分隔，如 RB,CU,AL；直接回车更新全部): ").strip()
+    varieties = [v.strip().upper() for v in varieties_input.split(',')] if varieties_input else None
+    
+    print("\n" + "=" * 80)
+    print(f"开始更新期限结构数据到 {target_date}")
+    if varieties:
+        print(f"指定品种: {', '.join(varieties)}")
+    print("=" * 80 + "\n")
+    
+    try:
+        updater = TermStructureUpdater()
+        result = updater.update_to_date(target_date, specific_varieties=varieties)
+        
+        print("\n" + "=" * 80)
+        print("✅ 更新完成！".center(76))
+        print("=" * 80)
+        
+        input("\n按回车键退出...")
+        
+    except KeyboardInterrupt:
+        print("\n\n⚠️ 用户中断更新")
+        sys.exit(1)
+    except Exception as e:
+        print(f"\n\n❌ 更新失败: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        input("\n按回车键退出...")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
