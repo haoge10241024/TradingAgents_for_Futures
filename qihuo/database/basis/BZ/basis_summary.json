@@ -1,11 +1,11 @@
 {
   "symbol": "BZ",
-  "record_count": 48,
+  "record_count": 201,
   "date_range": {
-    "start": "2025-09-02T00:00:00",
-    "end": "2025-11-14T00:00:00"
+    "start": "2025-07-08T00:00:00",
+    "end": "2026-06-26T00:00:00"
   },
-  "last_updated": "2025-11-15T17:15:35.636959",
+  "last_updated": "2026-06-28T07:44:02.386361",
   "columns": [
     "date",
     "symbol",

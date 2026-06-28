@@ -443,11 +443,7 @@ class StreamlitDataManager:
                 "data_file": "long_position_ranking.csv",  # 使用CSV文件而非JSON
                 "date_column": "date",
                 "date_format": "%Y-%m-%d",  # CSV文件中的日期格式是YYYY-MM-DD
-<<<<<<< HEAD
                 "update_script": "unified_futures_data_updater.py",
-=======
-                "update_script": "modules/positioning_updater.py",
->>>>>>> 354a84f5e735adfcb2d1f87cea9a90d5f1264cc2
                 "structure_type": "by_commodity"  # 按品种分文件夹
             },
             "term_structure": {

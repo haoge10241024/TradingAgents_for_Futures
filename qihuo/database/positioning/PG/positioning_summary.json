@@ -1,11 +1,11 @@
 {
   "symbol": "PG",
   "symbol_name": "液化石油气",
-  "total_records": 240,
+  "total_records": 180,
   "position_types": [
     "成交量",
     "多单持仓",
     "空单持仓"
   ],
-  "update_time": "2025-11-12 20:43:52"
+  "update_time": "2026-06-28 08:09:01"
 }

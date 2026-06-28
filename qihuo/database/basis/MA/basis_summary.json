@@ -1,11 +1,11 @@
 {
   "symbol": "MA",
-  "record_count": 48,
+  "record_count": 217,
   "date_range": {
-    "start": "2025-09-02T00:00:00",
-    "end": "2025-11-14T00:00:00"
+    "start": "2025-06-16T00:00:00",
+    "end": "2026-06-26T00:00:00"
   },
-  "last_updated": "2025-11-15T17:15:35.663290",
+  "last_updated": "2026-06-28T07:44:02.436118",
   "columns": [
     "date",
     "symbol",

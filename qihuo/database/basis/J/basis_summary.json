@@ -1,11 +1,11 @@
 {
   "symbol": "J",
-  "record_count": 7,
+  "record_count": 154,
   "date_range": {
     "start": "2025-11-06T00:00:00",
-    "end": "2025-11-14T00:00:00"
+    "end": "2026-06-26T00:00:00"
   },
-  "last_updated": "2025-11-15T17:15:35.593759",
+  "last_updated": "2026-06-28T07:44:02.318153",
   "columns": [
     "date",
     "symbol",
